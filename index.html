@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BSVHUB.APP</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #355070;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #132440;
+      color: #FFC900;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    section {
+      background: #132440;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    section h2 {
+      border-bottom: 2px solid white;
+      padding-bottom: 0.5rem;
+      margin-top: 0;
+      color: white;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: white;
+    }
+    li {
+      margin: 0.5rem 0;
+    }
+    a {
+      color: #FFC900;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BSVHUB.APP</h1>
+    <p>Your HUB to Bitcoin SV: this site is under construction, the links below are real</p>
+    <p>last updated: 11 Nov. 2025</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Explorers & Block Tools</h2>
+      <ul>
+        <li><a href="https://whatsonchain.com" target="_blank">Whatsonchain</a> – The main BSV blockchain explorer</li>
+        
+      </ul>
+    </section>
+
+    <section>
+      <h2>Wallets & Identity</h2>
+      <ul>
+        <li><a href="https://electrumsv.io/" target="_blank">ElectrumSV</a> – A clasic Desktop wallet for Windows, Mac and Linux; also see next link below!</li>
+        <li><a href="https://docs.gorillapool.io/electrumsv/" target="_blank">ElectrumSV Server Details</a> – Using ElectrumSV with GorillaPool</li>
+        <li><a href="https://handcash.io" target="_blank">HandCash</a> – Mobile-friendly BSV wallet with Apps</li>
+        <li><a href="https://mybsv.io/" target="_blank">MyBSV.io</a> – On-Chain BSV wallet plus tools and links</li>
+        <li><a href="https://yours.org" target="_blank">Yours</a> – A Chromium/Chrome browser BSV Wallet extension</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Social & Apps</h2>
+      <ul>
+        <li><a href="https://treechat.ai" target="_blank">Treechat</a> – Social network on BSV</li>
+        <li><a href="https://getmetanet.com/" target="_blank">Metanet Desktop</a> – New standardised BSV protocal for wallet to app interface</li>
+        <li><a href="https://metanetapps.com/" target="_blank">Metanet Apps</a> – Metanet App Catalog</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Developer Tools & Docs</h2>
+      <ul>
+        <li><a href="https://bsvblockchain.org" target="_blank">BSV Blockchain Official Site</a> – Docs, SDKs, and APIs</li>
+        <li><a href="https://bsvassociation.org/" target="_blank">BSV Association</a> – Guardians of the BSV protocal</li>
+        <li><a href="https://projectbabbage.com/" target="_blank">Project Babbage</a> – Developer of new BRC-100 wallet standard</li>  
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> BSV Resources Hub — Independent Directory of BSV Projects
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
