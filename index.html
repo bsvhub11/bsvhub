@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>BSVhub.app</title>
-
   <link rel="preload" href="assets/facon.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/firefly.css">
@@ -23,35 +21,37 @@
   }
 </script>
 
+<div id="ui-fixed-wrapper">
+	<!-- HEADER -->
+	<div class="header-container">
+	  <div class="header-icons header-icons-left">
+		<a href="#" data-target="about-section" class="header-text-link">About</a>
+		<a href="#" data-target="tip-section" class="header-text-link">Tip</a>
+	  </div>
 
-<!-- HEADER -->
-<div class="header-container">
-  <div class="header-icons header-icons-left">
-    <a href="#" data-target="about-section" class="header-text-link">About</a>
-    <a href="#" data-target="tip-section" class="header-text-link">Tip</a>
-  </div>
+	  <h1 class="header-title">BSVhub.app</h1>
 
-  <h1 style="font-size: 3.5rem; color:#ff5733;">BSVhub.app</h1>
+	  <div class="header-icons header-icons-right">
+		<a href="#" data-target="info-section" class="header-text-link">Info</a>
+		<a href="#" data-target="contact-section" class="header-text-link">Contact</a>
+	  </div>
+	</div>
 
-  <div class="header-icons header-icons-right">
-    <a href="#" data-target="info-section" class="header-text-link">Info</a>
-    <a href="#" data-target="contact-section" class="header-text-link">Contact</a>
-  </div>
+
+	<!-- TAB BAR -->
+	<div class="tab-bar">
+	  <button class="tab-btn active" data-target="explorers">Explorers & Block Tools</button>
+	  <button class="tab-btn" data-target="wallets">Wallets & Identity</button>
+	  <button class="tab-btn" data-target="social">Social & Apps</button>
+	  <button class="tab-btn" data-target="devtools">Developer Tools & Docs</button>
+	  <button class="tab-btn" data-target="mining">Mining</button>
+	  <button class="tab-btn" data-target="new">New</button>
+	</div>
+
+	<div id="tooltip-display"></div>
 </div>
 
-
-<!-- TAB BAR -->
-<div class="tab-bar">
-  <button class="tab-btn active" data-target="explorers">Explorers & Block Tools</button>
-  <button class="tab-btn" data-target="wallets">Wallets & Identity</button>
-  <button class="tab-btn" data-target="social">Social & Apps</button>
-  <button class="tab-btn" data-target="devtools">Developer Tools & Docs</button>
-  <button class="tab-btn" data-target="mining">Mining</button>
-  <button class="tab-btn" data-target="new">New</button>
-</div>
-
-<div id="tooltip-display"></div>
-
+<div id="content-area">
 <!-- ================= TAB CONTENT ================= -->
 
 <!-- EXPLORERS -->
@@ -59,8 +59,9 @@
   <ul class="icon-grid">
     <li>
       <a href="https://whatsonchain.com" target="_blank">
-        <div class="tooltip" data-tooltip="The main BSV blockchain explorer">
-          <img class="hover-enlarge" src="icon/whatsonchain.png" width="160">
+        <div class="icon-wrapper" data-tooltip="The main BSV blockchain explorer">
+          <img class="hover-enlarge" src="icon/whatsonchain.png" width="240" alt="WhatsOnChain">
+          <div class="icon-text">whatsonchain</div>
         </div>
       </a>
     </li>
@@ -70,45 +71,52 @@
 <!-- WALLETS -->
 <section id="wallets" class="tab-content">
   <ul class="icon-grid">
+
     <li>
-      <a href="https://electrumsv.io/" target="_blank">
-        <div class="tooltip" data-tooltip="Classic desktop wallet for Windows/Mac/Linux">
-          <img class="hover-enlarge" src="icon/electrumsv.png" width="160">
+      <a href="https://electrumsv.io" target="_blank">
+        <div class="icon-wrapper" data-tooltip="Classic desktop wallet for Windows/Mac/Linux">
+          <img class="hover-enlarge" src="icon/electrumsv.png" alt="Electrum SV">
+          <div class="icon-text">Electrum SV</div>
         </div>
       </a>
     </li>
 
     <li>
       <a href="https://docs.gorillapool.io/electrumsv/" target="_blank">
-        <div class="tooltip" data-tooltip="Using ElectrumSV with GorillaPool">
-          <img class="hover-enlarge" src="icon/electrumserver.png" width="160">
+        <div class="icon-wrapper" data-tooltip="Electrum SV Server for blockchain syncing">
+          <img class="hover-enlarge" src="icon/electrumserver.png" alt="Electrum SV Server">
+          <div class="icon-text">Electrum SV Server</div>
         </div>
       </a>
     </li>
 
     <li>
-      <a href="https://handcash.io" target="_blank">
-        <div class="tooltip" data-tooltip="Mobile-friendly BSV wallet with Apps">
-          <img class="hover-enlarge" src="icon/bsv.png" width="160">
+      <a href="https://handcash.io/" target="_blank">
+        <div class="icon-wrapper" data-tooltip="Mobile-friendly BSV wallet with Apps">
+          <img class="hover-enlarge" src="icon/handcash.png" alt="Handcash Wallet">
+          <div class="icon-text">Handcash Wallet</div>
         </div>
       </a>
     </li>
 
     <li>
       <a href="https://mybsv.io/" target="_blank">
-        <div class="tooltip" data-tooltip="Gateway an On-chain wallet at MyBSV.io">
-          <img class="hover-enlarge" src="icon/mybsv.png" width="160">
+        <div class="icon-wrapper" data-tooltip="Gateway to an on-chain wallet at MyBSV.io">
+          <img class="hover-enlarge" src="icon/mybsv.png" alt="Gateway Wallet">
+          <div class="icon-text">Gateway Wallet</div>
         </div>
       </a>
     </li>
 
     <li>
       <a href="https://yours.org" target="_blank">
-        <div class="tooltip" data-tooltip="Chrome-based BSV wallet extension">
-          <img class="hover-enlarge" src="icon/bsv.png" width="160">
+        <div class="icon-wrapper" data-tooltip="Chrome-based BSV wallet extension">
+          <img class="hover-enlarge" src="icon/yours.png" alt="Yours Wallet">
+          <div class="icon-text">Yours Wallet</div>
         </div>
       </a>
     </li>
+
   </ul>
 </section>
 
@@ -117,24 +125,27 @@
   <ul class="icon-grid">
     <li>
       <a href="https://treechat.ai" target="_blank">
-        <div class="tooltip" data-tooltip="Social network on BSV">
-          <img class="hover-enlarge" src="icon/treechat.png" width="160">
+        <div class="icon-wrapper" data-tooltip="Social network on BSV">
+          <img class="hover-enlarge" src="icon/treechat.png" width="160" alt="TreeChat">
+          <div class="icon-text">TreeChat</div>
         </div>
       </a>
     </li>
 
     <li>
       <a href="https://getmetanet.com/" target="_blank">
-        <div class="tooltip" data-tooltip="Metanet Desktop">
-          <img class="hover-enlarge" src="icon/metanet.png" width="160">
+        <div class="icon-wrapper" data-tooltip="Metanet Desktop App">
+          <img class="hover-enlarge" src="icon/metanet.png" width="160" alt="Metanet">
+          <div class="icon-text">Metanet</div>
         </div>
       </a>
     </li>
 
     <li>
       <a href="https://metanetapps.com/" target="_blank">
-        <div class="tooltip" data-tooltip="Metanet App Catalog">
-          <img class="hover-enlarge" src="icon/metanetapps.png" width="160">
+        <div class="icon-wrapper" data-tooltip="Metanet App Catalog">
+          <img class="hover-enlarge" src="icon/metanetapps.png" width="160" alt="Metanet Apps">
+          <div class="icon-text">Metanet Apps</div>
         </div>
       </a>
     </li>
@@ -145,25 +156,19 @@
 <section id="devtools" class="tab-content">
   <ul class="icon-grid">
     <li>
-      <a href="https://bsvblockchain.org" target="_blank">
-        <div class="tooltip" data-tooltip="Docs, SDKs, APIs">
-          <img class="hover-enlarge" src="icon/bsv.png" width="160">
-        </div>
-      </a>
-    </li>
-
-    <li>
       <a href="https://bsvassociation.org/" target="_blank">
-        <div class="tooltip" data-tooltip="Guardians of the BSV protocol">
-          <img class="hover-enlarge" src="icon/bsv.png" width="160">
+        <div class="icon-wrapper" data-tooltip="Guardians of the BSV protocol">
+          <img class="hover-enlarge" src="icon/bsv.png" width="160" alt="BSV Association">
+          <div class="icon-text">BSV Association</div>
         </div>
       </a>
     </li>
 
     <li>
       <a href="https://projectbabbage.com/" target="_blank">
-        <div class="tooltip" data-tooltip="Creators of BRC-100 Wallet Standard">
-          <img class="hover-enlarge" src="icon/bsv.png" width="160">
+        <div class="icon-wrapper" data-tooltip="Creators of BRC-100 Wallet Standard">
+          <img class="hover-enlarge" src="icon/bsv.png" width="160" alt="Project Babbage">
+          <div class="icon-text">Project Babbage</div>
         </div>
       </a>
     </li>
@@ -175,16 +180,18 @@
   <ul class="icon-grid">
     <li>
       <a href="https://gorillapool.com/" target="_blank">
-        <div class="tooltip" data-tooltip="GorillaPool Mining">
-          <img class="hover-enlarge" src="icon/gorillapool.png" width="160">
+        <div class="icon-wrapper" data-tooltip="GorillaPool Mining">
+          <img class="hover-enlarge" src="icon/gorillapool.png" width="160" alt="GorillaPool">
+          <div class="icon-text">GorillaPool</div>
         </div>
       </a>
     </li>
 
     <li>
       <a href="https://gorillapool.io/" target="_blank">
-        <div class="tooltip" data-tooltip="Join GorillaPool">
-          <img class="hover-enlarge" src="icon/gorillaminer.png" width="160">
+        <div class="icon-wrapper" data-tooltip="Join GorillaPool">
+          <img class="hover-enlarge" src="icon/gorillaminer.png" width="160" alt="Gorilla Miner">
+          <div class="icon-text">Gorilla Miner</div>
         </div>
       </a>
     </li>
@@ -196,92 +203,90 @@
   <ul class="icon-grid">
     <li>
       <a href="https://mybsv.io/" target="_blank">
-        <div class="tooltip" data-tooltip="On-chain wallet with links and tools">
-          <img class="hover-enlarge" src="icon/mybsv.png" width="160">
+        <div class="icon-wrapper" data-tooltip="On-chain wallet with links and tools">
+          <img class="hover-enlarge" src="icon/mybsv.png" width="160" alt="MyBSV">
+          <div class="icon-text">MyBSV</div>
         </div>
       </a>
     </li>
 
     <li>
       <a href="https://getmetanet.com/" target="_blank">
-        <div class="tooltip" data-tooltip="Metanet Desktop">
-          <img class="hover-enlarge" src="icon/metanet.png" width="160">
+        <div class="icon-wrapper" data-tooltip="Metanet Desktop App">
+          <img class="hover-enlarge" src="icon/metanet.png" width="160" alt="Metanet">
+          <div class="icon-text">Metanet</div>
         </div>
       </a>
     </li>
   </ul>
 </section>
 
-<!-- HEADER LINKS SECTIONS -->
-<section id="about-section" class="tab-content header-tab-content">
-  <div class="header-tab-text">Welcome to About</div>
-</section>
 
-<section id="tip-section" class="tab-content header-tab-content">
-  <div class="header-tab-text">14NJyZeKgbq5bXe7Hr5qd1BpWEGs2onJwX</div>
-</section>
+	<!-- HEADER LINKS SECTIONS; acts like a tab-->
+	<section id="about-section" class="tab-content header-tab-content">
+	  <div class="header-tab-text">Welcome to About</div>
+	</section>
 
-<section id="info-section" class="tab-content header-tab-content">
-  <div class="header-tab-text">Last updat: 16th Nov. 2025</div>
-</section>
+	<section id="tip-section" class="tab-content header-tab-content">
+	  <div class="header-tab-text">14NJyZeKgbq5bXe7Hr5qd1BpWEGs2onJwX</div>
+	</section>
 
-<section id="contact-section" class="tab-content header-tab-content">
-  <div class="header-tab-text">Contact us here</div>
-</section>
+	<section id="info-section" class="tab-content header-tab-content">
+	  <div class="header-tab-text">Last updat: 16th Nov. 2025</div>
+	</section>
 
+	<section id="contact-section" class="tab-content header-tab-content">
+	  <div class="header-tab-text">Contact us here</div>
+	</section>
 
+</div>
 
-
-<!-- ============ TAB SCRIPT ============ -->
 
 <script>
+/* ============================================================
+   1 — TOOLTIP SYSTEM (Option 2)
+   Uses data-tooltip on .icon-wrapper, displays in #tooltip-display
+   ============================================================ */
 const tooltipBox = document.getElementById("tooltip-display");
 
-document.querySelectorAll(".tooltip").forEach(tip => {
-    const text = tip.dataset.tooltip;
+document.querySelectorAll(".icon-wrapper[data-tooltip]").forEach(icon => {
+    const text = icon.dataset.tooltip;
 
-    tip.addEventListener("mouseenter", () => {
+    icon.addEventListener("mouseenter", () => {
         tooltipBox.textContent = text;
+        positionContentBelowTooltip(); // adjust content below tooltip dynamically
     });
 
-    tip.addEventListener("mouseleave", () => {
+    icon.addEventListener("mouseleave", () => {
         tooltipBox.textContent = "";
+        positionContentBelowTooltip();
     });
 });
-</script>
 
-<script>
-  // Your three colors
-  const colors = ["#555555", "#6a0dad", "#001f54"];
 
-  // Shuffle function
-  function shuffleArray(arr) {
+/* ============================================================
+   2 — BACKGROUND GRADIENT
+   Randomizes a three-color gradient for .background-layer
+   ============================================================ */
+const colors = ["#555555", "#6a0dad", "#001f54"];
+
+function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
-  }
+}
 
-  // Shuffle colors and apply gradient
-  const shuffled = shuffleArray([...colors]);
-  const gradient = `linear-gradient(135deg, ${shuffled[0]} 0%, ${shuffled[1]} 45%, ${shuffled[2]} 100%)`;
+const shuffled = shuffleArray([...colors]);
+const gradient = `linear-gradient(135deg, ${shuffled[0]} 0%, ${shuffled[1]} 45%, ${shuffled[2]} 100%)`;
+document.querySelector('.background-layer').style.background = gradient;
 
-  document.querySelector('.background-layer').style.background = gradient;
-</script>
 
-<script>
-  // Automatically set body padding to header height
-  const header = document.querySelector('.header-container');
-  document.body.style.paddingTop = header.offsetHeight + 'px';
-
-  // Optional: update if window is resized
-  window.addEventListener('resize', () => {
-    document.body.style.paddingTop = header.offsetHeight + 'px';
-  });
-</script>
-
-<script>
+/* ============================================================
+   3 — TAB & HEADER NAVIGATION
+   Handles tab button clicks and header link clicks
+   ============================================================ */
 const tabButtons = document.querySelectorAll('.tab-btn');
 const headerLinks = document.querySelectorAll('.header-text-link');
 const tabContents = document.querySelectorAll('.tab-content');
@@ -292,41 +297,91 @@ clickSound.volume = 0.3;
 
 // Function to activate a tab/section
 function activateTab(targetId, clickedElement = null) {
-  // Play click sound
-  clickSound.currentTime = 0;
-  clickSound.play().catch(()=>{});
+    // Play click sound
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {});
 
-  // Remove active from all buttons and header links
-  tabButtons.forEach(btn => btn.classList.remove('active'));
-  headerLinks.forEach(link => link.classList.remove('active'));
+    // Remove active state from all buttons and header links
+    tabButtons.forEach(btn => btn.classList.remove('active'));
+    headerLinks.forEach(link => link.classList.remove('active'));
 
-  // Add active to clicked element (tab or header link)
-  if (clickedElement) clickedElement.classList.add('active');
+    // Add active to clicked element (tab or header link)
+    if (clickedElement) clickedElement.classList.add('active');
 
-  // Hide all tab contents
-  tabContents.forEach(content => content.classList.remove('active'));
+    // Hide all tab contents
+    tabContents.forEach(content => content.classList.remove('active'));
 
-  // Show the targeted section
-  const target = document.getElementById(targetId);
-  if (target) target.classList.add('active');
+    // Show the targeted section
+    const target = document.getElementById(targetId);
+    if (target) target.classList.add('active');
 }
 
 // Event listeners for main tab buttons
 tabButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    activateTab(btn.dataset.target, btn);
-  });
+    btn.addEventListener('click', () => {
+        activateTab(btn.dataset.target, btn);
+    });
 });
 
 // Event listeners for header links
 headerLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault(); // prevent default link
-    activateTab(link.dataset.target, link);
-  });
+    link.addEventListener('click', (e) => {
+        e.preventDefault(); // prevent default link navigation
+        activateTab(link.dataset.target, link);
+    });
 });
-</script>
 
+
+/* ============================================================
+   4 — CONTENT POSITIONING BELOW TOOLTIP
+   Dynamically positions #content-area under tooltip bar
+   ============================================================ */
+function positionContentBelowTooltip() {
+    const tooltip = document.getElementById("tooltip-display");
+    const content = document.getElementById("content-area");
+
+    const tooltipRect = tooltip.getBoundingClientRect();
+    const extraOffset = -20; // raise content slightly above tooltip bottom
+
+    content.style.top = `${tooltipRect.bottom + extraOffset}px`;
+}
+
+// Run on page load and window resize
+window.addEventListener("load", positionContentBelowTooltip);
+window.addEventListener("resize", positionContentBelowTooltip);
+
+
+/* ============================================================
+   5 — ICON TEXT ADJUSTMENT
+   Ensures .icon-text stays on one line if it fits,
+   wraps only if too long for the icon
+   ============================================================ */
+function adjustIconTextSmart() {
+    const icons = document.querySelectorAll('.icon-wrapper');
+
+    icons.forEach(icon => {
+        const text = icon.querySelector('.icon-text');
+
+        // Reset to one line
+        text.style.whiteSpace = 'nowrap';
+        text.style.maxWidth = '100%';
+
+        // Measure widths
+        const textWidth = text.scrollWidth;
+        const iconWidth = icon.offsetWidth;
+
+        // Allow wrapping only if text is wider than icon
+        if (textWidth > iconWidth) {
+            text.style.whiteSpace = 'normal';
+            text.style.maxWidth = '90%'; // small padding inside icon
+        }
+    });
+}
+
+// Run on page load and window resize
+window.addEventListener('load', adjustIconTextSmart);
+window.addEventListener('resize', adjustIconTextSmart);
+</script>
 
 </body>
 </html>
