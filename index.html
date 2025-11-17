@@ -22,6 +22,7 @@
 </script>
 
 <div id="ui-fixed-wrapper">
+
 	<!-- HEADER -->
 	<div class="header-container">
 	  <div class="header-icons header-icons-left">
@@ -37,7 +38,6 @@
 	  </div>
 	</div>
 
-
 	<!-- TAB BAR -->
 	<div class="tab-bar">
 	  <button class="tab-btn active" data-target="explorers">Explorers & Block Tools</button>
@@ -51,222 +51,40 @@
 	<div id="tooltip-display"></div>
 </div>
 
-<div id="content-area">
-<!-- ================= TAB CONTENT ================= -->
-
-<!-- EXPLORERS -->
-<section id="explorers" class="tab-content active">
-  <ul class="icon-grid">
-    <li>
-      <a href="https://whatsonchain.com" target="_blank">
-        <div class="icon-wrapper" data-tooltip="The main BSV blockchain explorer">
-          <img class="hover-enlarge" src="icon/whatsonchain.png" width="240" alt="WhatsOnChain">
-          <div class="icon-text">whatsonchain</div>
-        </div>
-      </a>
-    </li>
-  </ul>
-</section>
-
-<!-- WALLETS -->
-<section id="wallets" class="tab-content">
-  <ul class="icon-grid">
-
-    <li>
-      <a href="https://electrumsv.io" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Classic desktop wallet for Windows/Mac/Linux">
-          <img class="hover-enlarge" src="icon/electrumsv.png" alt="Electrum SV">
-          <div class="icon-text">Electrum SV</div>
-        </div>
-      </a>
-    </li>
-
-    <li>
-      <a href="https://docs.gorillapool.io/electrumsv/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Electrum SV Server for blockchain syncing">
-          <img class="hover-enlarge" src="icon/electrumserver.png" alt="Electrum SV Server">
-          <div class="icon-text">Electrum SV Server</div>
-        </div>
-      </a>
-    </li>
-
-    <li>
-      <a href="https://handcash.io/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Mobile-friendly BSV wallet with Apps">
-          <img class="hover-enlarge" src="icon/handcash.png" alt="Handcash Wallet">
-          <div class="icon-text">Handcash Wallet</div>
-        </div>
-      </a>
-    </li>
-
-    <li>
-      <a href="https://mybsv.io/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Gateway to an on-chain wallet at MyBSV.io">
-          <img class="hover-enlarge" src="icon/mybsv.png" alt="Gateway Wallet">
-          <div class="icon-text">Gateway Wallet</div>
-        </div>
-      </a>
-    </li>
-
-    <li>
-      <a href="https://yours.org" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Chrome-based BSV wallet extension">
-          <img class="hover-enlarge" src="icon/yours.png" alt="Yours Wallet">
-          <div class="icon-text">Yours Wallet</div>
-        </div>
-      </a>
-    </li>
-
-  </ul>
-</section>
-
-<!-- SOCIAL -->
-<section id="social" class="tab-content">
-  <ul class="icon-grid">
-    <li>
-      <a href="https://treechat.ai" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Social network on BSV">
-          <img class="hover-enlarge" src="icon/treechat.png" width="160" alt="TreeChat">
-          <div class="icon-text">TreeChat</div>
-        </div>
-      </a>
-    </li>
-
-    <li>
-      <a href="https://getmetanet.com/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Metanet Desktop App">
-          <img class="hover-enlarge" src="icon/metanet.png" width="160" alt="Metanet">
-          <div class="icon-text">Metanet</div>
-        </div>
-      </a>
-    </li>
-
-    <li>
-      <a href="https://metanetapps.com/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Metanet App Catalog">
-          <img class="hover-enlarge" src="icon/metanetapps.png" width="160" alt="Metanet Apps">
-          <div class="icon-text">Metanet Apps</div>
-        </div>
-      </a>
-    </li>
-  </ul>
-</section>
-
-<!-- DEV TOOLS -->
-<section id="devtools" class="tab-content">
-  <ul class="icon-grid">
-    <li>
-      <a href="https://bsvassociation.org/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Guardians of the BSV protocol">
-          <img class="hover-enlarge" src="icon/bsv.png" width="160" alt="BSV Association">
-          <div class="icon-text">BSV Association</div>
-        </div>
-      </a>
-    </li>
-
-    <li>
-      <a href="https://projectbabbage.com/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Creators of BRC-100 Wallet Standard">
-          <img class="hover-enlarge" src="icon/bsv.png" width="160" alt="Project Babbage">
-          <div class="icon-text">Project Babbage</div>
-        </div>
-      </a>
-    </li>
-  </ul>
-</section>
-
-<!-- MINING -->
-<section id="mining" class="tab-content">
-  <ul class="icon-grid">
-    <li>
-      <a href="https://gorillapool.com/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="GorillaPool Mining">
-          <img class="hover-enlarge" src="icon/gorillapool.png" width="160" alt="GorillaPool">
-          <div class="icon-text">GorillaPool</div>
-        </div>
-      </a>
-    </li>
-
-    <li>
-      <a href="https://gorillapool.io/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Join GorillaPool">
-          <img class="hover-enlarge" src="icon/gorillaminer.png" width="160" alt="Gorilla Miner">
-          <div class="icon-text">Gorilla Miner</div>
-        </div>
-      </a>
-    </li>
-  </ul>
-</section>
-
-<!-- NEW -->
-<section id="new" class="tab-content">
-  <ul class="icon-grid">
-    <li>
-      <a href="https://mybsv.io/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="On-chain wallet with links and tools">
-          <img class="hover-enlarge" src="icon/mybsv.png" width="160" alt="MyBSV">
-          <div class="icon-text">MyBSV</div>
-        </div>
-      </a>
-    </li>
-
-    <li>
-      <a href="https://getmetanet.com/" target="_blank">
-        <div class="icon-wrapper" data-tooltip="Metanet Desktop App">
-          <img class="hover-enlarge" src="icon/metanet.png" width="160" alt="Metanet">
-          <div class="icon-text">Metanet</div>
-        </div>
-      </a>
-    </li>
-  </ul>
-</section>
+<!-- JSON POPULATED CONTENT -->
+<div id="content-area"></div>
 
 
-	<!-- HEADER LINKS SECTIONS; acts like a tab-->
-	<section id="about-section" class="tab-content header-tab-content">
-	  <div class="header-tab-text">Welcome to About</div>
-	</section>
-
-	<section id="tip-section" class="tab-content header-tab-content">
-	  <div class="header-tab-text">14NJyZeKgbq5bXe7Hr5qd1BpWEGs2onJwX</div>
-	</section>
-
-	<section id="info-section" class="tab-content header-tab-content">
-	  <div class="header-tab-text">Last updat: 16th Nov. 2025</div>
-	</section>
-
-	<section id="contact-section" class="tab-content header-tab-content">
-	  <div class="header-tab-text">Contact us here</div>
-	</section>
-
-</div>
-
-
+<!-- ============================================================
+   EXISTING JS (MODIFIED ONLY WHEN REQUIRED)
+   ============================================================ -->
 <script>
 /* ============================================================
-   1 — TOOLTIP SYSTEM (Option 2)
-   Uses data-tooltip on .icon-wrapper, displays in #tooltip-display
+   1 — TOOLTIP SYSTEM (FIXED)
    ============================================================ */
+
 const tooltipBox = document.getElementById("tooltip-display");
 
-document.querySelectorAll(".icon-wrapper[data-tooltip]").forEach(icon => {
-    const text = icon.dataset.tooltip;
+/* NEW — reusable tooltip binder for dynamic content */
+function bindTooltips() {
+    document.querySelectorAll(".icon-wrapper[data-tooltip]").forEach(icon => {
+        const text = icon.dataset.tooltip;
 
-    icon.addEventListener("mouseenter", () => {
-        tooltipBox.textContent = text;
-        positionContentBelowTooltip(); // adjust content below tooltip dynamically
-    });
+        icon.addEventListener("mouseenter", () => {
+            tooltipBox.textContent = text;
+            positionContentBelowTooltip();
+        });
 
-    icon.addEventListener("mouseleave", () => {
-        tooltipBox.textContent = "";
-        positionContentBelowTooltip();
+        icon.addEventListener("mouseleave", () => {
+            tooltipBox.textContent = "";
+            positionContentBelowTooltip();
+        });
     });
-});
+}
 
 
 /* ============================================================
    2 — BACKGROUND GRADIENT
-   Randomizes a three-color gradient for .background-layer
    ============================================================ */
 const colors = ["#555555", "#6a0dad", "#001f54"];
 
@@ -284,103 +102,149 @@ document.querySelector('.background-layer').style.background = gradient;
 
 
 /* ============================================================
-   3 — TAB & HEADER NAVIGATION
-   Handles tab button clicks and header link clicks
+   3 — TAB SYSTEM (FIXED)
    ============================================================ */
+
 const tabButtons = document.querySelectorAll('.tab-btn');
 const headerLinks = document.querySelectorAll('.header-text-link');
-const tabContents = document.querySelectorAll('.tab-content');
 
-// Tab click sound
 const clickSound = new Audio('assets/sounds/tab-click.mp3');
 clickSound.volume = 0.3;
 
-// Function to activate a tab/section
+/* FIX: re-query tab contents every time */
 function activateTab(targetId, clickedElement = null) {
-    // Play click sound
     clickSound.currentTime = 0;
     clickSound.play().catch(() => {});
 
-    // Remove active state from all buttons and header links
     tabButtons.forEach(btn => btn.classList.remove('active'));
     headerLinks.forEach(link => link.classList.remove('active'));
 
-    // Add active to clicked element (tab or header link)
     if (clickedElement) clickedElement.classList.add('active');
 
-    // Hide all tab contents
-    tabContents.forEach(content => content.classList.remove('active'));
+    /* FIX: dynamically retrieve tab contents after JSON load */
+    document.querySelectorAll('.tab-content').forEach(sec =>
+        sec.classList.remove('active')
+    );
 
-    // Show the targeted section
     const target = document.getElementById(targetId);
     if (target) target.classList.add('active');
 }
 
-// Event listeners for main tab buttons
 tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        activateTab(btn.dataset.target, btn);
-    });
+    btn.addEventListener('click', () => activateTab(btn.dataset.target, btn));
 });
 
-// Event listeners for header links
 headerLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault(); // prevent default link navigation
+    link.addEventListener('click', e => {
+        e.preventDefault();
         activateTab(link.dataset.target, link);
     });
 });
 
 
 /* ============================================================
-   4 — CONTENT POSITIONING BELOW TOOLTIP
-   Dynamically positions #content-area under tooltip bar
+   4 — POSITIONING
    ============================================================ */
 function positionContentBelowTooltip() {
     const tooltip = document.getElementById("tooltip-display");
     const content = document.getElementById("content-area");
 
-    const tooltipRect = tooltip.getBoundingClientRect();
-    const extraOffset = -20; // raise content slightly above tooltip bottom
+    const rect = tooltip.getBoundingClientRect();
+    const extraOffset = -20;
 
-    content.style.top = `${tooltipRect.bottom + extraOffset}px`;
+    content.style.top = `${rect.bottom + extraOffset}px`;
 }
 
-// Run on page load and window resize
-window.addEventListener("load", positionContentBelowTooltip);
 window.addEventListener("resize", positionContentBelowTooltip);
 
 
 /* ============================================================
-   5 — ICON TEXT ADJUSTMENT
-   Ensures .icon-text stays on one line if it fits,
-   wraps only if too long for the icon
+   5 — ICON TEXT
    ============================================================ */
 function adjustIconTextSmart() {
-    const icons = document.querySelectorAll('.icon-wrapper');
-
-    icons.forEach(icon => {
+    document.querySelectorAll('.icon-wrapper').forEach(icon => {
         const text = icon.querySelector('.icon-text');
 
-        // Reset to one line
-        text.style.whiteSpace = 'nowrap';
-        text.style.maxWidth = '100%';
+        text.style.whiteSpace = "nowrap";
+        text.style.maxWidth = "100%";
 
-        // Measure widths
-        const textWidth = text.scrollWidth;
-        const iconWidth = icon.offsetWidth;
-
-        // Allow wrapping only if text is wider than icon
-        if (textWidth > iconWidth) {
-            text.style.whiteSpace = 'normal';
-            text.style.maxWidth = '90%'; // small padding inside icon
+        if (text.scrollWidth > icon.offsetWidth) {
+            text.style.whiteSpace = "normal";
+            text.style.maxWidth = "90%";
         }
     });
 }
 
-// Run on page load and window resize
-window.addEventListener('load', adjustIconTextSmart);
-window.addEventListener('resize', adjustIconTextSmart);
+
+/* ============================================================
+   6 — JSON LOADER (FIXED)
+   ============================================================ */
+fetch("list.json")
+    .then(r => r.json())
+    .then(data => {
+        const container = document.getElementById("content-area");
+
+        Object.entries(data.sections).forEach(([id, section]) => {
+            const sec = document.createElement("section");
+            sec.id = id;
+            sec.className = section.class;
+
+            /* Case A: icon-grid sections */
+			if (section.items) {
+
+				// === NEW: SORT ITEMS ALPHABETICALLY BY NAME ===
+				section.items.sort((a, b) => a.text.localeCompare(b.text));
+
+				const ul = document.createElement("ul");
+				ul.className = "icon-grid";
+
+				section.items.forEach(item => {
+					const li = document.createElement("li");
+					const a = document.createElement("a");
+					a.href = item.href;
+					a.target = "_blank";
+
+					const wrap = document.createElement("div");
+					wrap.className = "icon-wrapper";
+					wrap.dataset.tooltip = item.tooltip;
+
+					const img = document.createElement("img");
+					img.className = "hover-enlarge";
+					img.src = item.img;
+					if (item.width) img.width = item.width;
+					img.alt = item.alt;
+
+					const text = document.createElement("div");
+					text.className = "icon-text";
+					text.textContent = item.text;
+
+					wrap.appendChild(img);
+					wrap.appendChild(text);
+					a.appendChild(wrap);
+					li.appendChild(a);
+					ul.appendChild(li);
+				});
+
+				sec.appendChild(ul);
+			}
+
+
+            /* Case B: header-tab-content sections */
+            if (section.html) {
+                sec.innerHTML = section.html;
+            }
+
+            container.appendChild(sec);
+        });
+
+        /* re-bind capabilities AFTER injection */
+        bindTooltips();
+        adjustIconTextSmart();
+        positionContentBelowTooltip();
+
+        /* initial tab */
+        activateTab("explorers", document.querySelector('.tab-btn[data-target="explorers"]'));
+    });
 </script>
 
 </body>
