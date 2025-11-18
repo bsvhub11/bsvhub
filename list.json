@@ -81,7 +81,7 @@
         {
           "href": "https://www.slictionary.com/",
           "tooltip": "An on-chain Dictionary of unique terms/word",
-          "img": "icon/bsv.png",
+          "img": "icon/slictionary.png",
           "alt": "slictionary",
           "text": "slictionary"
         },
@@ -122,7 +122,7 @@
         {
           "href": "https://projectbabbage.com/",
           "tooltip": "Creators of BRC-100 Wallet Standard",
-          "img": "icon/bsv.png",
+          "img": "icon/pbabbage.png",
           "alt": "Project Babbage",
           "text": "Project Babbage"
         }
@@ -142,7 +142,7 @@
         {
           "href": "https://docs.projectbabbage.com/docs",
           "tooltip": "documentation for getting started with BSV development.",
-          "img": "icon/bsv.png",
+          "img": "icon/babbagedoc.png",
           "alt": "Project Babbage Docs",
           "text": "Project Babbage Docs"
         }
@@ -182,7 +182,7 @@
         {
           "href": "https://bsvblockchain.org/get-bsv/",
           "tooltip": "Exchanges list provided by bsvblockchain.org; check as some wallets are enchanges no longer work or support BSV",
-          "img": "icon/bsv.png",
+          "img": "icon/xlist.png",
           "alt": "Exchange List",
           "text": "Exchnage List"
         }
@@ -211,7 +211,7 @@
 
     "about-section": {
       "class": "tab-content header-tab-content",
-      "html": "<div class=\"header-tab-text\">Welcome to About</div>"
+      "html": "<div class=\"header-tab-text\">Last updat: 18th Nov. 2025</div>"
     },
 
     "tip-section": {

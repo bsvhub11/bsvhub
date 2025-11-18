@@ -33,14 +33,30 @@
 	  <h1 class="header-title">BSVhub.app</h1>
 
 	  <div class="header-icons header-icons-right">
-		<a href="#" data-target="info-section" class="header-text-link">Info</a>
+		<!--a href="#" data-target="info-section" class="header-text-link">Info</a-->
 		<a href="#" data-target="contact-section" class="header-text-link">Contact</a>
+		<!-- Visit Counter -->
+		<div id="visit-counter" style="pointer-events: none;">
+			<script type="text/javascript" src="https://counter.websiteout.com/js/6/6/0/0"></script>
+		</div>
 	  </div>
 	</div>
 
 	<!-- TAB BAR -->
 	<div class="tab-bar">
-	  	<button class="tab-btn" data-target="explorers">Block Explorers</button>
+
+		<!-- NEW — SEARCH BAR -->
+		<div class="search-container">
+			<input 
+				id="search-box"
+				class="search-box"
+				type="text"
+				placeholder="search here"
+			>
+		</div>
+
+		<!-- ORIGINAL TAB BUTTONS -->
+		<button class="tab-btn" data-target="explorers">Block Explorers</button>
 		<button class="tab-btn" data-target="wallets">Wallets</button>
 		<button class="tab-btn" data-target="social">Social</button>
 		<button class="tab-btn" data-target="apps">Apps</button>
@@ -49,7 +65,9 @@
 		<button class="tab-btn" data-target="mining">Mining</button>
 		<button class="tab-btn" data-target="exchange">Buy BSV</button>
 		<button class="tab-btn" data-target="new">New</button>
+
 	</div>
+
 
 	<div id="tooltip-display"></div>
 </div>
@@ -190,47 +208,49 @@ fetch("list.json")
         Object.entries(data.sections).forEach(([id, section]) => {
             const sec = document.createElement("section");
             sec.id = id;
-            sec.className = section.class;
+
+            // 🔹 FIX: Ensure all sections get the 'tab-content' class
+            // This is crucial — activateTab() relies on .tab-content
+            sec.className = "tab-content " + (section.class || "");
 
             /* Case A: icon-grid sections */
-			if (section.items) {
+            if (section.items) {
 
-				// === NEW: SORT ITEMS ALPHABETICALLY BY NAME ===
-				section.items.sort((a, b) => a.text.localeCompare(b.text));
+                // === NEW: SORT ITEMS ALPHABETICALLY BY NAME ===
+                section.items.sort((a, b) => a.text.localeCompare(b.text));
 
-				const ul = document.createElement("ul");
-				ul.className = "icon-grid";
+                const ul = document.createElement("ul");
+                ul.className = "icon-grid";
 
-				section.items.forEach(item => {
-					const li = document.createElement("li");
-					const a = document.createElement("a");
-					a.href = item.href;
-					a.target = "_blank";
+                section.items.forEach(item => {
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+                    a.href = item.href;
+                    a.target = "_blank";
 
-					const wrap = document.createElement("div");
-					wrap.className = "icon-wrapper";
-					wrap.dataset.tooltip = item.tooltip;
+                    const wrap = document.createElement("div");
+                    wrap.className = "icon-wrapper";
+                    wrap.dataset.tooltip = item.tooltip;
 
-					const img = document.createElement("img");
-					img.className = "hover-enlarge";
-					img.src = item.img;
-					if (item.width) img.width = item.width;
-					img.alt = item.alt;
+                    const img = document.createElement("img");
+                    img.className = "hover-enlarge";
+                    img.src = item.img;
+                    if (item.width) img.width = item.width;
+                    img.alt = item.alt;
 
-					const text = document.createElement("div");
-					text.className = "icon-text";
-					text.textContent = item.text;
+                    const text = document.createElement("div");
+                    text.className = "icon-text";
+                    text.textContent = item.text;
 
-					wrap.appendChild(img);
-					wrap.appendChild(text);
-					a.appendChild(wrap);
-					li.appendChild(a);
-					ul.appendChild(li);
-				});
+                    wrap.appendChild(img);
+                    wrap.appendChild(text);
+                    a.appendChild(wrap);
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                });
 
-				sec.appendChild(ul);
-			}
-
+                sec.appendChild(ul);
+            }
 
             /* Case B: header-tab-content sections */
             if (section.html) {
@@ -240,14 +260,83 @@ fetch("list.json")
             container.appendChild(sec);
         });
 
-        /* re-bind capabilities AFTER injection */
+        // 🔹 Re-bind tooltips, adjust text, and position content after sections are injected
         bindTooltips();
         adjustIconTextSmart();
         positionContentBelowTooltip();
-
-        /* initial tab */
-        activateTab("explorers", document.querySelector('.tab-btn[data-target="explorers"]'));
     });
+
+/* ============================================================
+7 — SEARCH SYSTEM (GLOBAL SEARCH WITH DYNAMIC TAB HIGHLIGHT)
+============================================================ */
+const searchBox = document.getElementById("search-box");
+
+// Tabs we do NOT want to filter — these are header-only sections
+const excludedTabs = [
+    "about-section",
+    "tip-section",
+    "info-section",
+    "contact-section"
+];
+
+searchBox.addEventListener("input", () => {
+    const query = searchBox.value.toLowerCase();
+
+    // 🔹 If search is empty, reset all items to visible and activate default tab
+    if (!query) {
+        document.querySelectorAll(".tab-content").forEach(section => {
+            section.querySelectorAll("li").forEach(li => li.style.display = "");
+            section.classList.remove("active");
+        });
+
+        // Reset to default tab
+        activateTab("new", document.querySelector('.tab-btn[data-target="new"]'));
+        return;
+    }
+
+    let firstVisibleTabId = null;
+    const seenTexts = new Set(); // 🔹 NEW: Keep track of already displayed item texts
+
+    // 🔹 Filter all sections with icon-grid items
+    document.querySelectorAll(".tab-content").forEach(section => {
+        if (excludedTabs.includes(section.id)) return;
+
+        const lis = section.querySelectorAll("li");
+        if (!lis.length) return;
+
+        lis.forEach(li => {
+            const wrapper = li.querySelector(".icon-wrapper");
+            const txt = wrapper.querySelector(".icon-text").textContent.toLowerCase();
+            const tip = wrapper.dataset.tooltip.toLowerCase();
+            const match = txt.includes(query) || tip.includes(query);
+
+            // 🔹 Only display if it matches AND hasn't been displayed yet
+            if (match && !seenTexts.has(txt)) {
+                li.style.display = "";
+                seenTexts.add(txt); // 🔹 Mark this text as displayed
+            } else {
+                li.style.display = "none";
+            }
+        });
+
+        // 🔹 Section is active if it has at least one visible item
+        const anyVisible = Array.from(lis).some(li => li.style.display !== "none");
+        if (anyVisible) {
+            section.classList.add("active");
+            if (!firstVisibleTabId) firstVisibleTabId = section.id; // remember first visible section
+        } else {
+            section.classList.remove("active");
+        }
+    });
+
+    // 🔹 Update tab button highlighting to match first visible section
+    if (firstVisibleTabId) {
+        tabButtons.forEach(btn => {
+            btn.classList.toggle("active", btn.dataset.target === firstVisibleTabId);
+        });
+    }
+});
+
 </script>
 
 </body>

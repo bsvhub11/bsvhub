@@ -71,42 +71,64 @@ body {
    3 — HEADER SYSTEM
    ============================================================ */
 
+/* ============================================================
+   3 — HEADER SYSTEM  (UPDATED WITH TRUE CENTERED TITLE)
+   ============================================================ */
+
 /* Fixed wrapper for header + tabs + tooltip */
 #ui-fixed-wrapper {
-    position: fixed;               /* stick to top of viewport */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;                   /* full width */
-    display: flex;                 /* vertical stack: header + tabs + tooltip */
+    width: 100%;
+    display: flex;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.85); /* semi-transparent black backdrop */
-    z-index: 5000;                 /* always on top */
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 5000;
 }
 
-/* Header bar layout */
+/* ------------------------------------------------------------
+   HEADER BAR LAYOUT
+   Using a 3-column grid with equal flexible sides ensures the
+   title stays perfectly centered at ALL times.
+   ------------------------------------------------------------ */
 .header-container {
-    display: grid;                 /* three-column layout */
-    grid-template-columns: auto 1fr auto;
-    align-items: center;           /* vertically center items */
-    column-gap: 10px;              /* spacing between left/title/right */
+    display: grid;
 
-    width: 100%;                   /* full width */
-    padding: 0 10px;               /* inner horizontal spacing */
+    /* 
+       NEW STRUCTURE:
+       1fr  = left flexible space
+       auto = centered title
+       1fr  = right flexible space
+       This forces the center column to stay centered ALWAYS.
+    */
+    grid-template-columns: 1fr auto 1fr;
 
-    background: rgba(0, 0, 0, 0.8);/* slightly darker than wrapper for layered effect */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.8); /* subtle header shadow */
-    /* box-sizing: border-box;  redundant, already global */
+    align-items: center;
+    column-gap: 10px;
+
+    width: 100%;
+    padding: 0 10px;
+
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
-/* Main title in header */
+/* ------------------------------------------------------------
+   HEADER TITLE — PERFECTLY CENTERED
+   ------------------------------------------------------------ */
 .header-title {
-    font-size: clamp(1rem, 5vw, 8rem); /* responsive font size */
-    text-align: center;                 /* center title horizontally */
-    margin: 0;                          /* remove default margin */
-    white-space: nowrap;                /* avoid wrapping */
+    font-size: clamp(1rem, 5vw, 8rem);
+    text-align: center;
+
+    /* NEW — Keeps title centered even if side content grows */
+    justify-self: center;
+
+    margin: 0;
+    white-space: nowrap;
     color: #111111;
 
-    /* Neon glow effect */
+    /* neon effect */
     text-shadow:  
         0 0 2px #00ff88,
         0 0 5px #00ff88,
@@ -114,58 +136,85 @@ body {
         0 0 20px #00ff88;
 }
 
-/* Header left link group */
-.header-icons-left {
-    display: flex;                 /* horizontal flex layout */
-    flex-wrap: wrap;               /* wrap if needed */
-    justify-content: start;        /* align left */
-    gap: 10px;                     /* spacing between links */
-}
-
-/* Header right link group */
+/* ------------------------------------------------------------
+   HEADER SIDE BUTTON GROUPS
+   Kept lightweight so they never push the title off-center.
+   ------------------------------------------------------------ */
+.header-icons-left,
 .header-icons-right {
-    display: flex;                 /* horizontal flex layout */
-    flex-wrap: wrap;               /* wrap if needed */
-    justify-content: end;          /* align right */
-    gap: 10px;                     /* spacing between links */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-/* Individual header navigation links */
+/* Left side stays aligned left */
+.header-icons-left {
+    justify-content: flex-start;
+}
+
+/* Right side stays aligned right */
+.header-icons-right {
+    justify-content: flex-end;
+}
+
+/* ------------------------------------------------------------
+   HEADER LINK BUTTONS (About / Tip / Info / Contact / Counter)
+   ------------------------------------------------------------ */
 .header-text-link {
-    display: inline-flex;          /* center content */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    padding: 6px 14px;             /* internal spacing */
-    white-space: nowrap;            /* prevent line breaks */
+    padding: 6px 14px;
+    white-space: nowrap;
 
-    font-size: 1.4rem;             /* text size */
-    color: #ffcc66;                /* text color */
+    font-size: 1.4rem;
+    color: #ffcc66;
     text-decoration: none;
 
-    background: rgba(255,255,255,0.1); /* faint backdrop */
-    border-radius: 10px;                /* rounded corners */
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
 
-    /* smooth transitions for hover effects */
     transition: 
         transform 0.3s,
         color 0.3s,
         background 0.3s;
 }
 
-/* Hover state for header links */
+/* Hover effect */
 .header-text-link:hover {
-    transform: scale(1.12);            /* grow slightly */
+    transform: scale(1.12);
     background: rgba(255,204,102,0.85);
     color: #000;
 }
 
-/* Active header link (when its section is open) */
+/* Active state styling */
 .header-text-link.active {
-    background: #b8860b;               /* golden background */
+    background: #b8860b;
     color: #000;
-    box-shadow: 0 0 15px 4px rgba(184,134,11,0.7); /* glow effect */
-    text-shadow: 0 0 8px rgba(220,180,50,0.8);     /* text glow */
+    box-shadow: 0 0 15px 4px rgba(184,134,11,0.7);
+    text-shadow: 0 0 8px rgba(220,180,50,0.8);
+}
+
+#visit-counter {
+    display: inline-flex;           /* like header-text-link */
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    white-space: nowrap;
+
+    font-size: 1.4rem;
+    color: #ffcc66;
+    text-decoration: none;
+
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    cursor: pointer;                /* indicate interactivity */
+
+    transition: 
+        transform 0.3s,
+        color 0.3s,
+        background 0.3s;
 }
 
 /* ============================================================
@@ -467,3 +516,58 @@ ul.icon-grid li a img {
     }
 }
 
+/* ============================================================
+   10 — SEARCH BAR — MATCH TAB BUTTON STYLE
+   ============================================================ */
+
+/* Make search box match tab buttons */
+.search-box {
+    height: 50px;             /* match tab button height */
+    font-size: 14px;          /* match button font size */
+    padding: 0 12px;          /* horizontal padding */
+    border-radius: 5px;       /* same rounding as buttons if any */
+    border: 1px solid #ccc;   /* same or similar border */
+    box-sizing: border-box;   /* include padding in width calculation */
+}
+
+#search-box {
+    width: 70%;
+    padding: 10px 14px;
+	font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    
+    color: #ffcc66;
+
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 204, 102, 0.4);
+    border-radius: 14px;
+
+    outline: none;
+
+    /* smooth animation (same as tab buttons) */
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.2s ease;
+}
+
+/* Hover effect (same glow as tab buttons) */
+#search-box:hover {
+    background: rgba(255, 204, 102, 0.2);
+    box-shadow: 0 0 12px rgba(255, 204, 102, 0.7);
+}
+
+/* Focus effect (typing glow) */
+#search-box:focus {
+    background: rgba(255, 204, 102, 0.25);
+    border-color: #ffcc66;
+    box-shadow: 0 0 18px rgba(255, 204, 102, 0.9);
+    transform: scale(1.01);
+}
+
+/* Search placeholder text */
+#search-box::placeholder {
+    color: rgba(255, 204, 102, 0.6);
+}
