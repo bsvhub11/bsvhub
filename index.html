@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="preload" href="assets/facon.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/firefly.css">
 </head>
@@ -10,6 +9,7 @@
 <body>
 <div class="background-layer"></div>
 <div class="firefly-layer"></div>
+<audio id="copy-sfx" src="styles/assets/copy.mp3"></audio>
 
 <script>
   const fireflyContainer = document.querySelector('.firefly-layer');
@@ -146,14 +146,9 @@ document.querySelector('.background-layer').style.background = gradient;
 const tabButtons = document.querySelectorAll('.tab-btn');
 const headerLinks = document.querySelectorAll('.header-text-link');
 
-const clickSound = new Audio('assets/sounds/tab-click.mp3');
-clickSound.volume = 0.3;
-
 /* FIX: re-query tab contents every time */
 function activateTab(targetId, clickedElement = null) {
-    clickSound.currentTime = 0;
-    clickSound.play().catch(() => {});
-
+    
     tabButtons.forEach(btn => btn.classList.remove('active'));
     headerLinks.forEach(link => link.classList.remove('active'));
 
@@ -418,6 +413,14 @@ function setTooltipText(text) {
 // Optional: also recalc when window size changes
 window.addEventListener("resize", updateTooltipWrapAnimation);
 
+</script>
+
+<script>
+document.addEventListener("click", e =>
+  e.target.id === "copy-tip-btn"
+    ? document.getElementById("copy-sfx").play()
+    : 0
+);
 </script>
 
 </body>
