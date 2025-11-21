@@ -20,7 +20,6 @@
     fireflyContainer.appendChild(firefly);
   }
 </script>
-
 <div id="ui-fixed-wrapper">
 
 	<!-- HEADER -->
@@ -67,7 +66,6 @@
 		
 	</div>
 
-
 	<div id="tooltip-display"></div>
 </div>
 
@@ -82,13 +80,11 @@
 		<div class="header-tab-text">
 			Number of visitors:<br><br>
 
-			<!-- BEGIN: Powered by Supercounters.com -->
-			<div id="sc-counter" style="display:inline-block;">
-				<script type="text/javascript" src="//widget.supercounters.com/ssl/hit.js"></script>
-				<script type="text/javascript">sc_hit(1725073,8,5);</script>
-				<noscript><a href="http://www.supercounters.com/">free online counter</a></noscript>
+			<!-- BEGIN: visitor counter -->
+			<div id="visit-counter" style="pointer-events: none;">
+				<script type="text/javascript" src="https://counter.websiteout.com/js/22/6/0/0"></script>
 			</div>
-			<!-- END: Powered by Supercounters.com -->
+			<!-- END: visitor counter -->
 
 			<br><br>
 			Last update: 21th Nov. 2025
@@ -96,14 +92,8 @@
 	</section>
 
 
-</div>
 
-<!-- Load visitor counter AFTER the about section exists -->
-<!--script>
-const script = document.createElement("script");
-script.src = "https://counter.websiteout.com/js/7/6/0/1";
-document.getElementById("visit-counter").appendChild(script);
-</script-->
+</div>
 
 <script>
 /* ============================================================

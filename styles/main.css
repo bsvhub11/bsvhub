@@ -195,35 +195,6 @@ body {
     text-shadow: 0 0 8px rgba(220,180,50,0.8);
 }
 
-/*#visit-counter {
-    display: inline-flex;           /* like header-text-link */
-  /*  align-items: center;
-    justify-content: center;
-    padding: 6px 14px;
-    white-space: nowrap;
-
-    font-size: 1.4rem;
-    color: #ffcc66;
-    text-decoration: none;
-
-    background: rgba(255,255,255,0.1);
-    border-radius: 10px;
-    cursor: pointer;                /* indicate interactivity */
-
-    /*transition: 
-        transform 0.3s,
-        color 0.3s,
-        background 0.3s;
-}*/
-
-#visit-counter {
-    display: inline-block;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-
-
 /* ============================================================
    4 — TAB BAR SYSTEM
    ============================================================ */
