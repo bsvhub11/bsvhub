@@ -1,561 +1,420 @@
-				/*index*/
-/* 1 — GLOBAL / RESET / FONTS */
-/* 2 — BACKGROUND + EFFECT LAYERS */
-/* 3 — HEADER SYSTEM */
-/* 4 — TAB BAR SYSTEM */
-/* 5 — TOOLTIP BAR */
-/* 6 — CONTENT AREA LAYOUT */
-/* 7 — ICON GRID MODULE */
-/* 8 — HEADER-TEXT SECTIONS */
-/* 9 — MEDIA QUERIES */
-/*10 — SEARCH BAR — MATCH TAB BUTTON STYLE */
+/*index*/
+/* ------------------------------------------------------------
+   1 — GLOBAL / RESET / BASE FONTS
+   2 — BACKGROUND LAYERS (LAYER 0)
+   3 — TOP-UI (HEADER + TAB BAR + TOOLTIP)  [LAYER 1]
+   4 — TOOLTIP BAR
+   5 — CONTENT AREA (LAYER 2)
+   6 — ICON GRID MODULE
+   7 — HEADER-TAB TEXT SECTIONS
+   8 — SEARCH BAR (MATCHES TAB STYLE)
+   9 — COPY BUTTON (TIP SECTION)
+   10 — MEDIA QUERIES
+------------------------------------------------------------ */
+
 
 /* ============================================================
-   1 — GLOBAL / RESET / FONTS
+   1 — GLOBAL / RESET / BASE FONTS
    ============================================================ */
 
-/* Load font */
 @font-face {
     font-family: 'VT323';
     src: url('assets/VT323-Regular.ttf') format('truetype');
 }
 
-/* Set global box model */
+:root {
+    --tooltip-speed: 0.45s;      /* tooltip + content sync speed */
+    --top-ui-shadow: rgba(0,0,0,0.7);
+}
+
 html {
     box-sizing: border-box;
-    background-color: rgba(40, 30, 90);   /* prevent white flash */
+    background-color: rgb(40, 30, 90);
     height: 100%;
 }
 
-/* Apply box model everywhere */
 *, *::before, *::after {
     box-sizing: inherit;
 }
 
-/* Base page styling */
 body {
     margin: 0;
     padding: 0;
-    min-height: 100%;           /* safer than height:100% */
     font-family: 'VT323', monospace;
     font-size: 1.2rem;
     letter-spacing: 2px;
-    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 100%;
+    color: white;
 }
 
+
+
 /* ============================================================
-   2 — BACKGROUND + EFFECT LAYERS
+   2 — BACKGROUND LAYERS (LAYER 0)
    ============================================================ */
 
-/* Gradient background layer behind everything */
-.background-layer {
-    position: fixed;             /* full viewport */
-    inset: 0;                    /* shorthand for top:0; left:0; right:0; bottom:0 */
-    z-index: 0;                  /* bottom-most layer */
-    background-repeat: no-repeat;
+#background-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
     background-size: cover;
     background-position: center;
-    pointer-events: none;        /* clicks pass through */
-    overflow: hidden;            /* contain background */
+    background-repeat: no-repeat;
+    pointer-events: none;
 }
 
-/* Firefly animation layer */
-.firefly-layer {
+#firefly-layer {
     position: fixed;
-    inset: 0;                    /* shorthand for full screen */
-    z-index: 2;                  /* above background */
-    pointer-events: none;        /* clicks pass through */
-    overflow: hidden;            /* contain fireflies */
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
 }
+
+
 
 /* ============================================================
-   3 — HEADER SYSTEM  (UPDATED WITH TRUE CENTERED TITLE)
+   3 — TOP-UI (HEADER + TAB BAR + TOOLTIP)  [LAYER 1]
    ============================================================ */
 
-/* Fixed wrapper for header + tabs + tooltip */
-#ui-fixed-wrapper {
+#top-ui {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 5000;
     display: flex;
     flex-direction: column;
-    background: transparent !important;
-    /*background: rgba(0, 0, 0, 0.85);  /* semi-transparent so fireflies show through */
-    z-index: 5000;                    /* way above fireflies */
+    background: transparent;
+    pointer-events: auto;
 }
 
+
+
 /* ------------------------------------------------------------
-   HEADER BAR LAYOUT
-   Using a 3-column grid with equal flexible sides ensures the
-   title stays perfectly centered at ALL times.
-   ------------------------------------------------------------ */
+   HEADER BAR
+------------------------------------------------------------ */
 .header-container {
     display: grid;
-
-    /* 
-       NEW STRUCTURE:
-       1fr  = left flexible space
-       auto = centered title
-       1fr  = right flexible space
-       This forces the center column to stay centered ALWAYS.
-    */
     grid-template-columns: 1fr auto 1fr;
-	/*background: transparent !important;*/
-	background: rgba(40, 30, 90, 0.5); /* burple–navy blue + transparency */
     align-items: center;
-    column-gap: 10px;
 
-    width: 100%;
-    padding: 0 10px;
+    padding: 0 12px;
+    background: rgba(0, 0, 0, 0.85);
 
-    background: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    box-shadow: 0 2px 10px var(--top-ui-shadow);
 }
 
-/* ------------------------------------------------------------
-   HEADER TITLE — PERFECTLY CENTERED
-   ------------------------------------------------------------ */
 .header-title {
-    font-size: clamp(1rem, 5vw, 8rem);
-    text-align: center;
-
-    /* NEW — Keeps title centered even if side content grows */
+    font-size: clamp(1rem, 5vw, 3.2rem);
     justify-self: center;
-
-    margin: 0;
     white-space: nowrap;
-    color: #111111;
+    margin: 0;
 
-    /* neon effect */
-    text-shadow:  
+    color: #111;
+    text-shadow:
         0 0 2px #00ff88,
         0 0 5px #00ff88,
         0 0 10px #00ff88,
         0 0 20px #00ff88;
 }
 
-/* ------------------------------------------------------------
-   HEADER SIDE BUTTON GROUPS
-   Kept lightweight so they never push the title off-center.
-   ------------------------------------------------------------ */
-.header-icons-left,
-.header-icons-right {
+.header-icons {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
 }
 
-/* Left side stays aligned left */
 .header-icons-left {
     justify-content: flex-start;
 }
-
-/* Right side stays aligned right */
 .header-icons-right {
     justify-content: flex-end;
 }
 
-/* ------------------------------------------------------------
-   HEADER LINK BUTTONS (About / Tip / Info / Contact / Counter)
-   ------------------------------------------------------------ */
 .header-text-link {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-
     padding: 6px 14px;
-    white-space: nowrap;
-
     font-size: 1.4rem;
     color: #ffcc66;
-    text-decoration: none;
-
     background: rgba(255,255,255,0.1);
     border-radius: 10px;
+    text-decoration: none;
 
-    transition: 
-        transform 0.3s,
-        color 0.3s,
-        background 0.3s;
+    transition: background 0.3s, transform 0.3s;
 }
-
-/* Hover effect */
 .header-text-link:hover {
-    transform: scale(1.12);
-    background: rgba(255,204,102,0.85);
-    color: #000;
+    background: rgba(255,204,102,0.8);
+    color: black;
+    transform: scale(1.1);
 }
-
-/* Active state styling */
 .header-text-link.active {
     background: #b8860b;
-    color: #000;
-    box-shadow: 0 0 15px 4px rgba(184,134,11,0.7);
-    text-shadow: 0 0 8px rgba(220,180,50,0.8);
+    color: black;
+    box-shadow: 0 0 15px rgba(184,134,11,0.7);
 }
 
-/* ============================================================
-   4 — TAB BAR SYSTEM
-   ============================================================ */
 
-/* Main row of large tabs — improved wrap for balanced rows (stretch disabled) */
+
+/* ------------------------------------------------------------
+   TAB BAR
+------------------------------------------------------------ */
 .tab-bar {
     display: flex;
-    flex-wrap: wrap;               /* allow buttons to wrap */
-    justify-content: center;       /* center tabs horizontally */
-    align-items: center;           /* <-- changed: stop stretching, center vertically */
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 10px;
     gap: 10px;
 
-    width: 100%;
-    padding: 12px 12px 16px;
-
-    background: rgba(25, 25, 25, 0.8); /* burple–navy blue + transparency */
+    padding: 12px;
+    background: rgba(25, 25, 25, 0.8);
     backdrop-filter: blur(4px);
-    box-sizing: border-box;
 
-    /* vertical spacing between wrapped rows */
-    row-gap: 10px;
+    box-shadow: 0 2px 6px var(--top-ui-shadow);
 }
 
-/* keep your button sizing rules — tabs adjust to fit text with NO truncation */
 .tab-bar button {
-    flex: 0 0 auto;               /* <-- prevents shrinking AND prevents forced expansion */
-    min-width: 100px;       	  /* <-- button must be wide enough for full text */
-    max-width: none;              /* <-- remove width cap so text never gets cut */
+    flex: 0 0 auto;
+    min-width: 100px;
 
     padding: 12px 18px;
-    font-family: 'VT323', monospace;
+    font-family: 'VT323';
     font-size: clamp(0.9rem, 2.2vw, 1.3rem);
-    white-space: nowrap;          /* one-line text, required */
-    
-    /* REMOVE truncation */
-    overflow: visible;            /* allow full text */
-    text-overflow: clip;          /* neutral, no ellipsis */
+    white-space: nowrap;
 
-    border-radius: 10px;
-    border: 2px solid #ff5733;
-    background: rgba(255,255,255,0.1);
     color: white;
+    background: rgba(255,255,255,0.1);
 
-    transition: background 0.25s, transform 0.25s, font-size 0.25s;
+    border: 2px solid #ff5733;
+    border-radius: 10px;
+
+    transition: background 0.25s, transform 0.25s;
 }
-
-/* Optional: small-screen tweaks */
-@media (max-width: 960px) {
-    .tab-bar button {
-        padding: 14px 16px;               /* slightly taller for mobile */
-        font-size: 1rem;                   /* larger minimum font */
-    }
-}
-
-
-
-/* Active glowing tab */
-.tab-bar button.active {
-    background: #ff5733;           /* orange fill */
-    color: #000;
-    box-shadow: 0 0 15px 4px rgba(184,134,11,0.7); /* glow effect */
-    text-shadow: 0 0 8px rgba(255,180,50,0.8);
-    animation: pulseGlow 3s infinite; /* slow glow loop */
-}
-
-/* Hover state */
 .tab-bar button:hover {
-    transform: scale(1.06);             /* grow slightly */
-    background: rgba(255,87,51,0.8);    /* bright orange on hover */
-    box-shadow: 0 0 10px 3px rgba(255,87,51,0.6); /* subtle glow */
+    transform: scale(1.06);
+    background: rgba(255,87,51,0.8);
+}
+.tab-bar button.active {
+    background: #ff5733;
+    color: black;
+    box-shadow: 0 0 12px rgba(255,87,51,0.6);
 }
 
+
+
+
 /* ============================================================
-   5 — TOOLTIP BAR
+   4 — TOOLTIP BAR (inside top-ui)
    ============================================================ */
 
-/* The horizontal tooltip bar under the tab bar */
 #tooltip-display {
-	overflow: hidden;                  /* required */
-    max-height: 24px;                  /* default height (one line) */
-    transition: max-height 0.45s ease, padding 0.45s ease;
-    display: flex;                  /* horizontal layout for tooltip content */
-    justify-content: center;        /* center text horizontally */
-    flex-wrap: wrap;                /* allow wrapping for long text */
-    
-    width: 100%;                    /* full width */
-    padding: 0px 14px;              /* inner spacing */
-    min-height: 24px;               /* stable height for layout */
-    margin-bottom: 0px;             /* spacing before main content */
+    overflow: hidden;
 
-    color: #00ff88;                 /* green text glow */
-    text-align: center;             /* center text */
-    letter-spacing: 2px;            /* spacing between letters */
-    font-size: 1.2rem;              /* tooltip text size */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 
-    background: rgba(25, 25, 25, 0.6); /* burple–navy blue + transparency */
-    box-sizing: border-box;
-    z-index: 10;                     /* above content */
+    padding: 0 14px;
+    min-height: 24px;
+    max-height: 24px;
+
+    font-size: 1.2rem;
+    color: #00ff88;
+    text-align: center;
+
+    background: rgba(25, 25, 25, 0.6);
+    transition: max-height var(--tooltip-speed) ease,
+                padding var(--tooltip-speed) ease;
 }
 
-/* Container for each icon’s hover zone */
-.tooltip {
-    position: relative;              /* for positioning tooltip text if needed */
-    display: block;                  /* full width for hover detection */
-    width: 100%;
-}
-
-/* When long text is added */
 #tooltip-display.expanded {
-    max-height: 100px;                 /* enough for multiple lines */
-    padding-top: 0px;                  /* optional – soft open */
-    padding-bottom: 0px;
+    max-height: 100px;
 }
+
+
+
 /* ============================================================
-   6 — CONTENT AREA LAYOUT
+   5 — CONTENT AREA (LAYER 2)
    ============================================================ */
 
-/* The main scrollable content area */
 #content-area {
-    position: absolute;             /* JS repositions under tooltip */
-    top: 0;                         /* will be dynamically adjusted */
-    left: 0;
-    width: 100%;                    /* full width */
-    z-index: 10;                    /* above fireflies */
-    padding-bottom: 20px;           /* spacing at bottom */
-    
-    overflow-y: auto;               /* scroll vertically if content overflows */
-    overflow-x: hidden;             /* prevent horizontal scroll */
+    position: relative;
+    z-index: 200;
+
+    width: 100%;
+    padding-bottom: 40px;
+
+    /* pushed down by JS depending on top-ui height + tooltip expansion */
+    transition: top var(--tooltip-speed) ease;
 }
 
-/* Hidden tab sections */
-section.tab-content {
-    display: none;                  /* hidden by default */
-    padding: 16px;                  /* spacing inside each tab content */
+.tab-content {
+    display: none;
+    padding: 20px;
 }
 
-/* Visible tab section */
-section.tab-content.active {
-    display: block;                 /* show active tab */
-    animation: fadeIn 0.4s ease;    /* smooth fade-in effect */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
 }
 
-/* Simple fade animation for tab content */
 @keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(10px); /* slide up slightly */
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0);    /* end at normal position */
-    }
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
-
 
 /* ============================================================
-   7 — ICON GRID MODULE
+   6 — ICON GRID MODULE (Fixed Aspect Ratio & Centered Images)
    ============================================================ */
 
-/* Icon grid container */
 ul.icon-grid {
-    display: flex;                 /* horizontal flex layout */
-    flex-wrap: wrap;               /* allow wrapping to multiple rows */
-    justify-content: center;       /* center icons horizontally */
-    
-    padding: 5px;                 /* internal spacing */
-    margin: 0 auto;                /* center container */
-    max-width: 100vw;              /* prevent overflow */
-    overflow-x: hidden;            /* prevent horizontal scroll */
-    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 auto;
+    padding: 10px;
 }
 
-/* Each icon item */
 ul.icon-grid li {
-    display: flex;                 /* center content within list item */
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+ul.icon-grid li a {
+    padding: 6px;
+    border: 4px solid #2b3a45;
+    background: rgba(135,206,235,0.3);
+    border-radius: 20px;
+    text-decoration: none;
+
+    color: rgba(135,206,235,0.8);
+    transition: background 0.25s, border-color 0.25s, transform 0.25s;
+}
+
+ul.icon-grid li a:hover {
+    background: rgba(135,206,235,0.6);
+    border-color: #cc0022;
+    transform: scale(1.04);
+}
+
+/* icon wrapper is always a square */
+.icon-wrapper {
+    position: relative;
+    width: clamp(160px, 20vw, 240px);
+    aspect-ratio: 1 / 1;  /* ensures height = width */
+    flex-shrink: 0;
+    display: flex;         /* center image inside */
     align-items: center;
     justify-content: center;
-    margin: 12px;                   /* spacing between icons */
-    position: relative;            /* for overlay text positioning */
+    overflow: hidden;      /* prevents image overflow */
 }
 
-/* Icon clickable wrapper */
-ul.icon-grid li a {
-    display: inline-block;
-    padding: 6px;                 /* internal padding */
-    
-    background-color: rgba(135,206,235,0.3); /* light blue background */
-    border: 4px solid #2b3a45;    /* dark border */
-    border-radius: 20px;           /* rounded corners */
-
-    max-width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-    text-decoration: none;
-    color: rgba(135,206,235,0.6); /* bluish text color */
-
-    /* smooth hover transition */
-    transition: background-color 0.25s,
-                border-color 0.25s,
-                transform 0.25s;
-}
-
-/* Hover highlight for clickable icons */
-ul.icon-grid li a:hover {
-    background-color: rgba(135,206,235,0.6); /* highlight */
-    border-color: #cc0022;                   /* vivid red border */
-    transform: scale(1.04);                  /* slight grow */
-}
-
-/* Icon image sizing */
-ul.icon-grid li a img {
-    width: 200px;                /* standard image width */
-    height: auto;                /* preserve aspect ratio */
-    max-width: 100%;
+.icon-wrapper img {
+    max-width: 100%;       /* scale down to fit container */
+    max-height: 100%;
+    width: auto;           /* maintain original ratio */
+    height: auto;
     display: block;
+    object-fit: contain;   /* keeps image inside wrapper without cropping */
 }
 
-/* Hover-grow effect for images */
-.hover-enlarge {
-    transition: transform 0.25s;
-}
-.hover-enlarge:hover {
-    transform: scale(1.1);       /* slightly enlarge on hover */
-}
-
-/* Container for image + visible text */
-.icon-wrapper {
-    padding: 0;          /* no extra space */
-    margin: 0;           /* remove default spacing */
-    position: relative;     /* for absolutely positioned icon-text */
-    display: inline-block;  /* shrink-wrap to image width */
-}
-
-/* Visible text under icon */
 .icon-text {
     position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    white-space: nowrap;      /* keep one line unless JS decides to wrap */
+    bottom: 0px;
+    left: 0;
+    width: 100%;
     text-align: center;
-    max-width: 100%;
 
-    font-weight: normal;        /* make text bold */
-    font-size: 1.2rem;        /* larger text */
-    color: #e0e0e0;           /* very light gray */
-    
-    overflow: hidden;
-    text-overflow: ellipsis;  /* optional for very long text */
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+
+    color: #eee;
+    pointer-events: none;
 }
 
-
 /* ============================================================
-   8 — HEADER-TEXT SECTIONS (About / Tip / Info / Contact)
+   7 — HEADER-TAB TEXT SECTIONS (About / Tip / Contact)
    ============================================================ */
 
-/* Container for the simple text sections */
 .header-tab-content {
-    position: relative;            /* positioning context */
-    z-index: 5;                    /* above background but below header */
-    display: none;                 /* hidden until active */
-    
-    padding: 50px 20px;            /* spacing inside container */
-    text-align: center;            /* center text horizontally */
+    text-align: center;
 }
 
-/* Main big text inside the header sections */
 .header-tab-text {
-    font-size: 2rem;               /* large display text */
-    color: #ffd700;                /* yellow text */
-    max-width: 800px;              /* limit width for readability */
-    margin: 20px auto;             /* center block with vertical spacing */
-    line-height: 1.2;              /* tighter line spacing */
+    font-size: 2rem;
+    color: #ffd700;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* Show section when active */
-.header-tab-content.active {
-    display: block;                /* make visible */
-    animation: fadeIn 0.4s ease;   /* smooth fade-in effect */
-}
+
 
 /* ============================================================
-   9 — MEDIA QUERIES
+   8 — SEARCH BAR (MATCH TAB STYLE)
    ============================================================ */
 
-@media (max-width: 960px) {
-
-    /* Smaller icons for smaller screens */
-    ul.icon-grid li a img {
-        width: 160px;               /* reduce icon size */
-    }
-
-    /* Reduced hover grow effect for smaller screens */
-    .hover-enlarge:hover {
-        transform: scale(1.08);     /* slightly smaller scale */
-    }
-
-    /* Smaller padding for icon clickable wrapper */
-    ul.icon-grid li a {
-        padding: 6px;               /* reduce internal spacing */
-    }
-}
-
-/* ============================================================
-   10 — SEARCH BAR — MATCH TAB BUTTON STYLE
-   ============================================================ */
-
-/* Make search box match tab buttons (cleaned, duplicates removed) */
 #search-box {
-    max-width: 155px;         		 /* search button max width */
-    padding: 12px 18px;              /* vertical and horizontal padding */
-    font-family: 'VT323', monospace;
-    font-size: 1.2rem; /* responsive font size same as tab buttons */
-    white-space: nowrap;                   /* keep one line if it fits */
-    line-height: 1.2;                 /* optional, ensures correct vertical spacing */
-    border-radius: 10px;              /* match tab buttons */
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 204, 102, 0.4);
+    max-width: 155px;
+    padding: 12px 18px;
+
+    font-family: 'VT323';
+    font-size: 1.2rem;
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,204,102,0.4);
+
+    color: white;
     outline: none;
-    color: white;   /* <-- adds your desired font color */
+
     transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
 }
 
-/* hover & focus with original search colors */
 #search-box:hover {
-    transform: scale(1.06);                   /* same as tab buttons */
-    background: rgba(255, 204, 102, 0.2);
-    box-shadow: 0 0 12px rgba(255, 204, 102, 0.7);
-}
-#search-box:focus {
-    background: rgba(255, 204, 102, 0.25);
-    border-color: #ffcc66;
-    box-shadow: 0 0 18px rgba(255, 204, 102, 0.9);
-    transform: scale(1.01);
+    transform: scale(1.06);
+    background: rgba(255,204,102,0.2);
+    box-shadow: 0 0 12px rgba(255,204,102,0.7);
 }
 
-/* placeholder */
-#search-box::placeholder {
-    color: rgba(200, 200, 200, 0.7); /* colour of "serch here" text*/   
+#search-box:focus {
+    background: rgba(255,204,102,0.25);
+    border-color: #ffcc66;
+    box-shadow: 0 0 18px rgba(255,204,102,0.9);
 }
+
+#search-box::placeholder {
+    color: rgba(200,200,200,0.7);
+}
+
+
 
 /* ============================================================
-   11 — Copy Button inside Tip section
+   9 — COPY BUTTON (TIP SECTION)
    ============================================================ */
+
 .copy-btn {
     margin-left: 12px;
     padding: 8px 14px;
+
     font-size: 1.4rem;
-    font-family: 'VT323', monospace;
-    color: #000;
+    font-family: 'VT323';
+
     background: #ffcc66;
     border: 2px solid #b8860b;
+    color: black;
     border-radius: 10px;
+
     cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
+    transition: background 0.2s, transform 0.2s;
 }
 
 .copy-btn:hover {
-    transform: scale(1.08);
     background: #ffd98c;
+    transform: scale(1.08);
 }
 
 .copy-btn:active {
@@ -563,3 +422,23 @@ ul.icon-grid li a img {
 }
 
 
+
+/* ============================================================
+   10 — MEDIA QUERIES
+   ============================================================ */
+
+@media (max-width: 960px) {
+    ul.icon-grid img {
+        width: 160px;
+    }
+
+    .hover-enlarge:hover {
+        transform: scale(1.08);
+    }
+}
+
+@media (max-width: 960px) {
+    .icon-wrapper {
+        width: 160px;  /* match the resized image width */
+    }
+}
