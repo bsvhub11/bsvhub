@@ -1,427 +1,481 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/firefly.css">
+    <meta charset="UTF-8">
+
+    <!-- MAIN STYLES -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/firefly.css">
 </head>
 
 <body>
-<div class="background-layer"></div>
-<div class="firefly-layer"></div>
+
+<!-- ============================================================
+     LAYER 0 — BACKGROUND LAYERS
+============================================================ -->
+
+<div id="background-layer" class="background-layer"></div>
+<div id="firefly-layer" class="firefly-layer"></div>
+
 <audio id="copy-sfx" src="styles/assets/copy.mp3"></audio>
 
 <script>
-  const fireflyContainer = document.querySelector('.firefly-layer');
-  const quantity = 15;
-  for (let i = 0; i < quantity; i++) {
-    const firefly = document.createElement('div');
-    firefly.classList.add('firefly');
-    fireflyContainer.appendChild(firefly);
-  }
+/* Fireflies */
+const fireflyLayer = document.getElementById("firefly-layer");
+for (let i = 0; i < 15; i++) {
+    const f = document.createElement("div");
+    f.classList.add("firefly");
+    fireflyLayer.appendChild(f);
+}
 </script>
-<div id="ui-fixed-wrapper">
 
-	<!-- HEADER -->
-	<div class="header-container">
-	  <div class="header-icons header-icons-left">
-		<a href="#" data-target="about-section" class="header-text-link">About</a>
-		<a href="#" data-target="tip-section" class="header-text-link">Tip</a>
-	  </div>
 
-	  <h1 class="header-title">BSVhub.app</h1>
+<!-- ============================================================
+     LAYER 1 — TOP UI (HEADER + TAB BAR + TOOLTIP)
+============================================================ -->
 
-	  <div class="header-icons header-icons-right">
-		<!--a href="#" data-target="info-section" class="header-text-link">Info</a-->
-		<a href="#" data-target="contact-section" class="header-text-link">Contact</a>
-		
-	  </div>
-	</div>
+<div id="top-ui">
 
-	<!-- TAB BAR -->
-	<div class="tab-bar">
+    <!-- HEADER -->
+    <header class="header-container">
+        <div class="header-icons header-icons-left">
+            <a href="#" data-target="about-section" class="header-text-link">About</a>
+            <a href="#" data-target="tip-section" class="header-text-link">Tip</a>
+        </div>
 
-		
-				
-		<!-- ORIGINAL TAB BUTTONS -->
-		<button class="tab-btn" data-target="explorers">Block Explorers</button>
-		<button class="tab-btn" data-target="wallets">Wallets</button>
-		<button class="tab-btn" data-target="social">Social</button>
-		<button class="tab-btn" data-target="apps">Apps</button>
-		<button class="tab-btn" data-target="bsv">BSV Main Sites</button>
-		<button class="tab-btn" data-target="docs">Docs</button>
-		<button class="tab-btn" data-target="mining">Mining</button>
-		<button class="tab-btn" data-target="exchange">Buy BSV</button>
-		<button class="tab-btn" data-target="new">New</button>
-		
-		<!-- NEW — SEARCH BAR -->
-		<div class="search-container">
-    		<input 
-        		id="search-box"
-        		class="search-box"
-        		type="text"
-        		placeholder="search here"
-    		>
-		</div>
-		
-	</div>
+        <h1 class="header-title">BSVhub.app</h1>
 
-	<div id="tooltip-display"></div>
+        <div class="header-icons header-icons-right">
+            <a href="#" data-target="contact-section" class="header-text-link">Contact</a>
+        </div>
+    </header>
+
+
+    <!-- TAB BAR -->
+    <nav class="tab-bar">
+
+        <button class="tab-btn" data-target="explorers">Block Explorers</button>
+        <button class="tab-btn" data-target="wallets">Wallets</button>
+        <button class="tab-btn" data-target="social">Social</button>
+        <button class="tab-btn" data-target="apps">Apps</button>
+        <button class="tab-btn" data-target="bsv">BSV Main Sites</button>
+        <button class="tab-btn" data-target="docs">Docs</button>
+        <button class="tab-btn" data-target="mining">Mining</button>
+        <button class="tab-btn" data-target="exchange">Buy BSV</button>
+        <button class="tab-btn" data-target="new">New</button>
+
+        <div class="search-container">
+            <input id="search-box" type="text" placeholder="search here">
+        </div>
+
+    </nav>
+
+    <!-- TOOLTIP BAR -->
+    <div id="tooltip-display"></div>
+
 </div>
 
-<!-- JSON POPULATED CONTENT -->
-<div id="content-area">
-    
-    <!-- Unified Search Result Section -->
+
+
+<!-- ============================================================
+     LAYER 2 — CONTENT AREA (SCROLLABLE)
+============================================================ -->
+
+<main id="content-area">
+
+    <!-- SEARCH RESULTS -->
     <section id="search-results" class="tab-content"></section>
 
-    <!-- STATIC ABOUT SECTION (now part of HTML) -->
+    <!-- STATIC ABOUT SECTION -->
     <section id="about-section" class="tab-content header-tab-content">
-		<div class="header-tab-text">
-			Number of visitors:<br><br>
+        <div class="header-tab-text">
+            Number of visitors:
+            <br><br>
 
-			<!-- BEGIN: visitor counter -->
-			<div id="visit-counter" style="pointer-events: none;">
-				<script type="text/javascript" src="https://counter.websiteout.com/js/22/6/0/0"></script>
-			</div>
-			<!-- END: visitor counter -->
+            <div id="visit-counter" style="pointer-events:none;">
+                <script src="https://counter.websiteout.com/js/7/6/0/0"></script>
+            </div>
 
-			<br><br>
-			Last update: 21th Nov. 2025
-		</div>
-	</section>
+            <br><br>
+            Last update: 21th Nov. 2025
+        </div>
+    </section>
+
+</main>
 
 
 
-</div>
-
+<!-- ============================================================
+     1 — TOOLTIP SYSTEM (double-RAF + sticky-start)
+     - Ensures tooltip expansion has started before we measure.
+     - Triggers positionContent which now uses sticky rules.
+   ============================================================ -->
 <script>
-/* ============================================================
-   1 — TOOLTIP SYSTEM (FIXED)
-   ============================================================ */
-
 const tooltipBox = document.getElementById("tooltip-display");
 
-/* NEW — reusable tooltip binder for dynamic content */
 function bindTooltips() {
-    document.querySelectorAll(".icon-wrapper[data-tooltip]").forEach(icon => {
-        const text = icon.dataset.tooltip;
+    document.querySelectorAll(".icon-wrapper[data-tooltip]").forEach(wrapper => {
 
-        icon.addEventListener("mouseenter", () => {
-			setTooltipText(text);
-			positionContentBelowTooltip();
-		});
+        const text = wrapper.dataset.tooltip;
 
-		icon.addEventListener("mouseleave", () => {
-			setTooltipText("");
-			positionContentBelowTooltip();
-		});
+        wrapper.addEventListener("mouseenter", () => {
+            // set tooltip text (starts CSS transition)
+            setTooltipText(text);
 
+            // Double RAF to allow CSS transition to start and layout to update
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    // compute and apply sticky shift (may increase existing sticky)
+                    positionContent(wrapper);
+                });
+            });
+        });
+
+        wrapper.addEventListener("mouseleave", () => {
+            // collapse tooltip
+            setTooltipText("");
+
+            // On collapse we wait until transition end to fully reset (handled in Section 8)
+            // but recalc layout after collapse animation starts so UI feels responsive
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    positionContent(null);
+                });
+            });
+        });
     });
 }
 
+// Call after DOM injection of icons
+// bindTooltips();
+</script>
 
-/* ============================================================
-   2 — BACKGROUND GRADIENT
-   ============================================================ */
+
+
+
+
+<!-- ============================================================
+     JS SECTION 2 — BACKGROUND GRADIENT
+============================================================ -->
+
+<script>
 const colors = ["#555555", "#6a0dad", "#001f54"];
-
-function shuffleArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
 }
+document.getElementById("background-layer").style.background =
+  `linear-gradient(135deg, ${shuffle([...colors]).join(', ')})`;
+</script>
 
-const shuffled = shuffleArray([...colors]);
-const gradient = `linear-gradient(135deg, ${shuffled[0]} 0%, ${shuffled[1]} 45%, ${shuffled[2]} 100%)`;
-document.querySelector('.background-layer').style.background = gradient;
 
-
-/* ============================================================
-   3 — TAB SYSTEM (FIXED)
-   ============================================================ */
-
+<!--=========================================================
+     JS SECTION 3 — TAB SYSTEM  (WITH SEARCH RESET ADDED)
+============================================================ -->
+<script>
 const tabButtons = document.querySelectorAll('.tab-btn');
 const headerLinks = document.querySelectorAll('.header-text-link');
 
-/* FIX: re-query tab contents every time */
-function activateTab(targetId, clickedElement = null) {
-    
-    tabButtons.forEach(btn => btn.classList.remove('active'));
-    headerLinks.forEach(link => link.classList.remove('active'));
+/* ------------------------------------------------------------
+   RESET SEARCH
+   - clears input
+   - hides search results section
+   - resets layout
+------------------------------------------------------------ */
+function resetSearch() {
+    const resultSec = document.getElementById("search-results");
+    const searchBox = document.getElementById("search-box");
 
-    if (clickedElement) clickedElement.classList.add('active');
+    searchBox.value = "";                 // clear input
+    resultSec.innerHTML = "";             // clear search results
+    resultSec.classList.remove("active"); // hide search results
 
-    /* FIX: dynamically retrieve tab contents after JSON load */
+    // DEACTIVATE ALL TAB CONTENTS
     document.querySelectorAll('.tab-content').forEach(sec =>
         sec.classList.remove('active')
     );
 
-    const target = document.getElementById(targetId);
-    if (target) target.classList.add('active');
-}
-
-tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => activateTab(btn.dataset.target, btn));
-});
-
-headerLinks.forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        activateTab(link.dataset.target, link);
-    });
-});
-
-
-/* ============================================================
-   4 — POSITIONING
-   ============================================================ */
-function positionContentBelowTooltip() {
-    const tooltip = document.getElementById("tooltip-display");
-    const content = document.getElementById("content-area");
-
-    const rect = tooltip.getBoundingClientRect();
-    const extraOffset = -20;
-
-    content.style.top = `${rect.bottom + extraOffset}px`;
-}
-
-window.addEventListener("resize", positionContentBelowTooltip);
-
-
-/* ============================================================
-   5 — ICON TEXT
-   ============================================================ */
-function adjustIconTextSmart() {
-    document.querySelectorAll('.icon-wrapper').forEach(icon => {
-        const text = icon.querySelector('.icon-text');
-
-        text.style.whiteSpace = "nowrap";
-        text.style.maxWidth = "100%";
-
-        if (text.scrollWidth > icon.offsetWidth) {
-            text.style.whiteSpace = "normal";
-            text.style.maxWidth = "90%";
+    requestAnimationFrame(() => {
+        if (typeof positionContent === "function") {
+            positionContent(null);        // fix layout
         }
     });
 }
 
 
+/* ------------------------------------------------------------
+   ACTIVATE TAB
+------------------------------------------------------------ */
+function activateTab(targetId, source) {
+    tabButtons.forEach(b => b.classList.remove('active'));
+    headerLinks.forEach(h => h.classList.remove('active'));
+
+    if (source) source.classList.add('active');
+
+    document.querySelectorAll('.tab-content').forEach(sec =>
+        sec.classList.remove('active')
+    );
+
+    const sec = document.getElementById(targetId);
+    if (sec) sec.classList.add('active');
+}
+
+/* ------------------------------------------------------------
+   TAB BUTTON CLICK — WITH SEARCH RESET
+------------------------------------------------------------ */
+tabButtons.forEach(btn =>
+    btn.addEventListener("click", () => {
+        resetSearch();  // <-- NEW
+        activateTab(btn.dataset.target, btn);
+    })
+);
+
+/* ------------------------------------------------------------
+   HEADER LINK CLICK — WITH SEARCH RESET
+------------------------------------------------------------ */
+headerLinks.forEach(link =>
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+        resetSearch();  // <-- NEW
+        activateTab(link.dataset.target, link);
+    })
+);
+
+</script>
+
+
+
+<script>
 /* ============================================================
-   6 — JSON LOADER (FIXED)
+   4 — BASELINE CONTENT POSITIONING (NO HOVER SHIFTING)
+   Keeps content-area placed directly below #top-ui.
    ============================================================ */
+
+(function () {
+    const content = document.getElementById("content-area");
+    const topUI = document.getElementById("top-ui");
+
+    // Reposition content-area directly under top UI (header + tabs + tooltip)
+    function positionContent() {
+        const baseTop = topUI.offsetHeight;
+        content.style.top = `${baseTop}px`;
+    }
+
+    // Expose globally
+    window.positionContent = positionContent;
+
+    // Re-run on resize
+    window.addEventListener("resize", positionContent);
+
+    // Run once at load
+    requestAnimationFrame(positionContent);
+})();
+</script>
+
+
+<!-- ============================================================
+     JS SECTION 5 — ICON TEXT AUTO-FIT
+============================================================ -->
+
+<!--script>
+function adjustIconTextSmart() {
+    document.querySelectorAll('.icon-wrapper').forEach(icon => {
+        const t = icon.querySelector('.icon-text');
+        t.style.whiteSpace = "nowrap";
+        if (t.scrollWidth > icon.offsetWidth) {
+            t.style.whiteSpace = "normal";
+            t.style.maxWidth = "90%";
+        }
+    });
+}
+</script>
+
+
+
+<!-- ============================================================
+     JS SECTION 6 — JSON LOADER (FIXED & ROBUST)
+     - builds sections
+     - binds behaviors
+     - positions content (double RAF)
+     - auto-activates "new" tab or first tab fallback
+============================================================ -->
+<script>
 fetch("list.json")
-    .then(r => r.json())
-    .then(data => {
-        const container = document.getElementById("content-area");
+  .then(r => r.json())
+  .then(data => {
+    const container = document.getElementById("content-area");
 
-        Object.entries(data.sections).forEach(([id, section]) => {
-            const sec = document.createElement("section");
-            sec.id = id;
+    // Build sections
+    Object.entries(data.sections).forEach(([id, section]) => {
+      const sec = document.createElement("section");
+      sec.id = id;
+      sec.className = "tab-content";
 
-            // 🔹 FIX: Ensure all sections get the 'tab-content' class
-            // This is crucial — activateTab() relies on .tab-content
-            sec.className = "tab-content " + (section.class || "");
+      if (section.items) {
+        const ul = document.createElement("ul");
+        ul.className = "icon-grid";
 
-            /* Case A: icon-grid sections */
-            if (section.items) {
+        section.items.forEach(item => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.href = item.href || "#";
+          a.target = "_blank";
 
-                // === NEW: SORT ITEMS ALPHABETICALLY BY NAME ===
-                section.items.sort((a, b) => a.text.localeCompare(b.text));
+          const wrap = document.createElement("div");
+          wrap.className = "icon-wrapper";
+          if (item.tooltip) wrap.dataset.tooltip = item.tooltip;
 
-                const ul = document.createElement("ul");
-                ul.className = "icon-grid";
+          const img = document.createElement("img");
+          img.src = item.img || "";
+          img.alt = item.alt || "";
 
-                section.items.forEach(item => {
-                    const li = document.createElement("li");
-                    const a = document.createElement("a");
-                    a.href = item.href;
-                    a.target = "_blank";
+          const txt = document.createElement("div");
+          txt.className = "icon-text";
+          txt.textContent = item.text || "";
 
-                    const wrap = document.createElement("div");
-                    wrap.className = "icon-wrapper";
-                    wrap.dataset.tooltip = item.tooltip;
-
-                    const img = document.createElement("img");
-                    img.className = "hover-enlarge";
-                    img.src = item.img;
-                    if (item.width) img.width = item.width;
-                    img.alt = item.alt;
-
-                    const text = document.createElement("div");
-                    text.className = "icon-text";
-                    text.textContent = item.text;
-
-                    wrap.appendChild(img);
-                    wrap.appendChild(text);
-                    a.appendChild(wrap);
-                    li.appendChild(a);
-                    ul.appendChild(li);
-                });
-
-                sec.appendChild(ul);
-            }
-
-            /* Case B: header-tab-content sections */
-            if (section.html) {
-                sec.innerHTML = section.html;
-            }
-
-            container.appendChild(sec);
+          wrap.appendChild(img);
+          wrap.appendChild(txt);
+          a.appendChild(wrap);
+          li.appendChild(a);
+          ul.appendChild(li);
         });
 
-        // 🔹 Re-bind tooltips, adjust text, and position content after sections are injected
-        bindTooltips();
-        adjustIconTextSmart();
-        positionContentBelowTooltip();
+        sec.appendChild(ul);
+      }
+
+      if (section.html) sec.innerHTML = section.html;
+
+      container.appendChild(sec);
     });
 
-// Copy tip address button
-document.addEventListener("click", (e) => {
-    if (e.target.id === "copy-tip-btn") {
-        const addr = document.getElementById("tip-address").textContent.trim();
-        navigator.clipboard.writeText(addr).then(() => {
-            e.target.textContent = "Copied!";
-            setTimeout(() => (e.target.textContent = "Copy"), 1200);
-        });
+    // Bind behaviors
+    bindTooltips();
+    // adjustIconTextSmart(); // optional
+
+    // Ensure tab buttons exist
+    const tabButtons = document.querySelectorAll('.tab-btn');
+
+    // Activate "new" tab or first tab
+    const newBtn = document.querySelector('.tab-btn[data-target="new"]');
+    const firstBtn = tabButtons[0];
+    const targetBtn = newBtn || firstBtn;
+
+    if (targetBtn) {
+      // Use requestAnimationFrame to wait until DOM fully painted
+      requestAnimationFrame(() => {
+        activateTab(targetBtn.dataset.target, targetBtn);
+      });
     }
-});
+  })
+  .catch(err => console.error(err));
 
+</script>
 
-
-/* ============================================================
-7 — SEARCH SYSTEM (GLOBAL SEARCH WITH DYNAMIC TAB HIGHLIGHT)
-============================================================ */
+<!-- ============================================================
+     JS SECTION 7 — SEARCH SYSTEM (SLIMMED & WORKING)
+============================================================ -->
+<script>
 const searchBox = document.getElementById("search-box");
-
-// Tabs we do NOT want to filter — these are header-only sections
-const excludedTabs = [
-    "about-section",
-    "tip-section",
-    "info-section",
-    "contact-section"
-];
+const resultSec = document.getElementById("search-results");
+const excludedTabs = ["about-section","tip-section","info-section","contact-section"];
 
 searchBox.addEventListener("input", () => {
-    const query = searchBox.value.toLowerCase();
-    const searchSection = document.getElementById("search-results");
+    const q = searchBox.value.toLowerCase();
 
-    // ALWAYS clear previous results
-    searchSection.innerHTML = "";
+    // Clear previous search results
+    resultSec.innerHTML = "";
 
-    /* ------------------------------------------------------------
-       A — Empty search → restore normal tab view
-       ------------------------------------------------------------ */
-    if (!query) {
-
-        // Hide search result panel
-        searchSection.classList.remove("active");
-
-        // Restore default tab ("new")
-        activateTab("new", document.querySelector('.tab-btn[data-target="new"]'));
-
-        return; // END — nothing else happens when search is empty
+    // If search is empty, hide results and restore nothing
+    if (!q) {
+        resultSec.classList.remove("active");
+        return;
     }
 
-    /* ------------------------------------------------------------
-       B — Searching → disable all normal tabs
-       ------------------------------------------------------------ */
-    document.querySelectorAll(".tab-content").forEach(sec => {
-        if (sec !== searchSection) sec.classList.remove("active");
-    });
+    // DEACTIVATE CURRENT TAB AND TAB BUTTONS
+    document.querySelectorAll('.tab-content').forEach(sec =>
+        sec.classList.remove('active')
+    );
+    document.querySelectorAll('.tab-btn').forEach(btn =>
+        btn.classList.remove('active')
+    );
 
-    // Create the unified results grid
-    let resultGrid = document.createElement("ul");
-    resultGrid.className = "icon-grid";
+    const grid = document.createElement("ul");
+    grid.className = "icon-grid";
+    const found = new Set();
 
-    let found = 0;
-    const seenTexts = new Set(); // prevent duplicates
+    const excludedTabs = ["about-section","tip-section","info-section","contact-section"];
 
-    /* ------------------------------------------------------------
-       C — Scan ALL sections (except excluded ones)
-       ------------------------------------------------------------ */
-    document.querySelectorAll(".tab-content").forEach(section => {
-        if (excludedTabs.includes(section.id)) return;
+    document.querySelectorAll('.tab-content').forEach(sec => {
+        if (excludedTabs.includes(sec.id)) return;
 
-        const lis = section.querySelectorAll("li");
-        lis.forEach(li => {
+        sec.querySelectorAll('.icon-wrapper').forEach(icon => {
+            const txt = icon.querySelector('.icon-text').textContent.toLowerCase();
+            const tip = (icon.dataset.tooltip || "").toLowerCase();
 
-            const wrapper = li.querySelector(".icon-wrapper");
-            if (!wrapper) return;
-
-            const txt = wrapper.querySelector(".icon-text").textContent.toLowerCase();
-            const tip = wrapper.dataset.tooltip.toLowerCase();
-
-            const match = txt.includes(query) || tip.includes(query);
-
-            if (match && !seenTexts.has(txt)) {
-                // Clone so we don't remove original from its tab
-                resultGrid.appendChild(li.cloneNode(true));
-                seenTexts.add(txt);
-                found++;
+            if ((txt.includes(q) || tip.includes(q)) && !found.has(txt)) {
+                grid.appendChild(icon.closest("li").cloneNode(true));
+                found.add(txt);
             }
         });
     });
 
-    /* ------------------------------------------------------------
-       D — Display results or hide the search tab
-       ------------------------------------------------------------ */
-    if (found > 0) {
-
-        // Inject the unified results grid
-        searchSection.appendChild(resultGrid);
-
-        // 🔹 Re-bind tooltips for cloned search items (required!)
+    if (found.size > 0) {
+        resultSec.appendChild(grid);
         bindTooltips();
-
-        // Show search results section
-        searchSection.classList.add("active");
-
-        // Remove active highlight from all tabs
-        tabButtons.forEach(btn => btn.classList.remove("active"));
-
+        resultSec.classList.add("active");
     } else {
-
-        // No matches → hide search results section
-        searchSection.classList.remove("active");
+        resultSec.classList.remove("active");
     }
 });
 
-/* ============================================================
-8 — TOOLTIP wrapping annimation
-============================================================ */
+</script>
 
+<!-- ============================================================
+     8 — TOOLTIP WRAP ANIMATION & TEXT SETTER (sync + double-RAF)
+     ============================================================ -->
+<script>
 const tooltip = document.getElementById("tooltip-display");
 
 function updateTooltipWrapAnimation() {
-    // If content is taller than one line → we are wrapping
-    if (tooltip.scrollHeight > 30) {
-        tooltip.classList.add("expanded");
-    } else {
-        tooltip.classList.remove("expanded");
-    }
+    tooltip.classList.toggle("expanded", tooltip.scrollHeight > 28);
 }
 
-// Recalculate on new tooltip text
 function setTooltipText(text) {
     tooltip.innerHTML = text;
-    requestAnimationFrame(() => updateTooltipWrapAnimation());
+
+    // Update class immediately so CSS transition starts
+    updateTooltipWrapAnimation();
+
+    // Double RAF before measuring to allow layout to settle after CSS change
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            // Let positioning logic run; it will use sticky rules
+            // We call with null so baseline is applied but sticky may persist
+            if (typeof positionContent === 'function') positionContent(null);
+        });
+    });
 }
-
-// Optional: also recalc when window size changes
-window.addEventListener("resize", updateTooltipWrapAnimation);
-
 </script>
+
+
+
+
+<!-- ============================================================
+     JS SECTION 9 — COPY BUTTON SOUND
+============================================================ -->
 
 <script>
-document.addEventListener("click", e =>
-  e.target.id === "copy-tip-btn"
-    ? document.getElementById("copy-sfx").play()
-    : 0
-);
+document.addEventListener("click", (e) => {
+    if (e.target.id === "copy-tip-btn") {
+        document.getElementById("copy-sfx").play();
+    }
+});
 </script>
+
+
 
 </body>
 </html>
